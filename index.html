@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        background-color:#FF254A;
+      }
+			.container {
+				height: 100%;
+				width: 70%;
+				margin: 0 auto;
+			}
+			.headerNav {
+				min-height: 20vh;
+				height: 20%;
+				margin: 20px auto 0px;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+			}
+			.navArrow {
+				width: 50px;
+				height: 50px;
+				/* background-color: white; */
+				padding-top: 15px;
+				cursor: pointer;
+			}
+			i:hover {
+				/* background-color:black; */
+				color: white;
+			}
+			.navArrow[disabled]{
+				pointer-events: none;
+				opacity: 0.7;
+			}
+			#leftArrow {
+				padding-right: 5px;
+			}
+			#rightArrow {
+				padding-left: 5px;
+			}
+
+			i {
+				border: solid black;
+				border-width: 0 2px 2px 0;
+				display: inline-block;
+				padding: 15px;
+			}
+
+			.right {
+				transform: rotate(-45deg);
+				-webkit-transform: rotate(-45deg);
+			}
+
+			.left {
+				transform: rotate(135deg);
+				-webkit-transform: rotate(135deg);
+			}
+			#callout {
+				position: relative;
+				/* min-height: 18vh; */
+				/* height: 20%;
+				margin: 20px auto 0px; */
+				/* width: 70%; */
+				display: block;
+				font-family: 'Source Serif Pro', serif;
+				font-size: 1.5em;
+				text-align: center;
+			}
+      #callout > .highlight {
+        color: white;
+      }
+			.menu {
+				position: relative;
+				height: 15vh;
+				text-align:center;
+  			align-content:center;
+			}
+			.legend {
+				display: flex;
+				flex-direction: row;
+				height: 20px;
+				justify-content: center;
+				padding-bottom: 20px;
+				font-family:'Source Sans Pro', serif;
+				font-size:12px;
+			}
+			.legendLabel {
+				padding-left: 5px;
+				padding-right: 10px;
+			}
+			.legendCircle {
+				background-color:white;
+				border-radius: 50%;
+				margin: auto 0;
+			}
+			#nationalCircle {
+				width: 15px;
+				height: 15px;
+			}
+			#regionalCircle {
+				width: 12px;
+				height: 12px;
+			}
+			#localCircle {
+				width: 9px;
+				height: 9px;
+			}
+			.buttonGroup {
+				margin:0 auto;
+   			display:block;
+			}
+			.button {
+				background-color:white;
+				border-radius:25px;
+				border-width: 0px;
+				display:inline-block;
+				cursor:pointer;
+				color:black;
+				font-family:'Source Sans Pro', serif;
+				font-size:12px;
+				padding:5px 12px;
+				margin: 1px 1px 5px 1px;
+				text-decoration:none;
+			}
+			.button:hover {
+				background-color:black;
+				color: white;
+			}
+			.button:active {
+				background-color:black;
+				color: white;
+				position:relative;
+				top:1px;
+			}
+			.button:focus {
+				background-color: black;
+				color: white;
+    		outline: none; 
+			}
+			/* .button .selected {
+				background-color:black;
+				color: white;
+			} */
+			#svgCanvas {
+				position: relative;
+				height: 65vh;
+			}
+      svg {
+        margin: 0 auto;
+        display: table;
+      }
+      .ancestor-circle {
+        fill-opacity: .1;
+        stroke-width: 2px;
+      }
+      .leaf-circle {
+        fill-opacity: 1;
+        stroke-width: 1.5px;
+      }
+			.group-label {
+				font-family:'Source Sans Pro', serif;
+				font-size:14px;
+			}
+    </style>
+  </head>
+  <body>
+			<div class="container">
+				<div class="headerNav">
+					<div id="leftArrow" class="navArrow"><i class="left"></i></div>
+					<div id="callout" ></div>
+					<div id="rightArrow" class="navArrow"><i class="right"></i></div>
+			</div>
+      <div id="svgCanvas"></div>
+			<div class="menu">
+				<div class="legend">
+					<div id="nationalCircle" class="legendCircle"></div>
+					<div class="legendLabel">National</div>
+					<div id="regionalCircle" class="legendCircle"></div>
+					<div class="legendLabel">Regional</div>
+					<div id="localCircle" class="legendCircle"></div>
+					<div class="legendLabel">Local</div>
+				</div>
+				<div class="buttonGroup">
+					<button id="all" class="button active">All</button>
+					<button id="sub_region" class="button">Regions</button>
+					<button id="actual_cause" class="button">Cause</button>
+					<button id="ordered_by" class="button">Ordered By</button>
+					<button id="official_just" class="button">Justification</button>
+					<button id="shutdown_type_new" class="button">Shutdown Type</button>
+					<button id="affected_network" class="button">Affected Network</button>
+				</div>
+			</div>
+		</div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+			const calloutMap = {
+				// "all": {
+				// 	"main": "In 2019, 1707 days of internet access were disrupted by 214 internet shutdowns across 33 countries.",
+				// 	"totalDays": 1707,
+				// 	"numShutdowns": 214,
+				// 	"numCountries": 33
+				// 	},
+				"all": 'In 2019, <span class="highlight">1707</span> days of internet access were disrupted by <span class="highlight">214</span> internet shutdowns across <span class="highlight">33</span> countries.',
+				"sub_region": 'The subregion most affected by internet shutdowns is <span class="highlight">Southern Asia</span>. In 2019, <span class="highlight">122</span> shutdowns were recorded in <span class="highlight">India</span>.',
+				"actual_cause": '<span class="highlight">Protests</span> are the top known cause of internet and network shutdowns.',
+				"ordered_by": 'From <span class="highlight">central governments</span> to <span class="highlight">local administrations</span>, many have the power to order an internet shutdown.',
+				"official_just": '<span class="highlight">Public safety</span>, <span class="highlight">national security</span>, or <span class="highlight">stopping fake news</span> are commonly used to justify shutdowns designed to prevent protests.',
+				"shutdown_type_new": 'Speed <span class="highlight">throttling</span> is more subtle than a <span class="highlight">full network shutdown</span> and is more likely to go undetected. In 2019, the #KeepItOn Shutdown Tracker Optimisation Project (STOP) recorded <span class="highlight">205</span> cases of shutdowns and <span class="highlight">15</span> cases of throttling.',
+				"affected_network": '<span class="highlight">62%</span> of the shutdowns recorded by STOP in 2019 affected both <span class="highlight">broadband</span> and <span class="highlight">mobile networks</span>.'
+			}
+
+			const selectedButtonIds = ["all", "sub_region", "actual_cause", "ordered_by", "official_just", "shutdown_type_new", "affected_network"]
+			let selectedIndex = 0
+      // const margin = {
+			// 	left: innerWidth * 0.1, 
+			// 	right: innerWidth * 0.1, 
+			// 	top: innerHeight * 0.1, 
+			// 	bottom: innerHeight * 0.1
+			// 	},
+			const margin = {
+				left: 0, 
+				right: 0, 
+				top: 0, 
+				bottom: 0
+				},
+          duration = 1000,
+          categories = "abcdefg".split(""),
+        //   colors = {},
+          radius = 2;
+          let buttonId = 'all'
+
+    //   categories.forEach((d, i) => {
+    //     colors[d] = d3.schemeSet2[i];
+    //   });
+
+      const svg = d3.select("#svgCanvas").append("svg");
+      const g = svg.append("g");
+
+      const pack = d3.pack()
+          .padding(d => d.height * 30);
+
+    d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
+        console.log(data)
+
+        const formatted = getFormattedData(data, radius)
+        console.log(formatted)
+
+        // let randomRoot = d3.hierarchy(makeData())
+        //             .sum(d => d.value)
+        //             .sort((a, b) => a.value - b.value);
+        
+        let root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
+            .sum(d => d.radius)
+    
+        console.log(root)
+
+        draw(false, root, buttonId);
+
+        onresize = _ => draw(true, root, buttonId);
+
+        ////// UTILS ////////
+        function getFormattedData(data, radius) {
+            const mapped = data.map( d => {
+                // create new leaner obj
+                // set radius based on geo_scope
+                if (d.geo_scope === 'Unknown') {
+                    d.radius = radius * 1
+                } else if (d.geo_scope === 'Level 1') {
+                    d.radius = radius * 2
+                } else if (d.geo_scope === 'Level 2') {
+                    d.radius = radius * 3
+                } else if (d.geo_scope === 'Level 3') {
+                    d.radius = radius * 4
+                }
+                d.access_now_ID = +d.access_now_ID
+                d.duration_affected_days = +d.duration_affected_days
+                // set starting position in center of svg
+                // d.focusX = width / 2
+                // d.focusY = height / 2
+                // console.log(width, height, d.focusX, d.focusY)
+                d.start_date_obj = new Date(d.start_date)
+                return d
+                // sort (not doing anything atm)
+            })
+            const sorted = mapped.sort((a, b) => new Date(b.start_date) - new Date(a.start_date)).reverse()
+            //   console.log(sorted)
+            return sorted
+        }
+
+        function draw(resizing, myRoot, myButtonId) {
+
+						// get the dom element width
+						function getDivDimension (div, dim) {
+							console.log(div, dim)
+							const dimension = d3.select(div)
+								// get the width of div element
+								.style(dim)
+								// take off 'px'
+								.slice(0, -2)
+							// return as an integer
+							return Math.round(Number(dimension))
+						}
+
+						const width = getDivDimension("#svgCanvas", "width")
+						const height = getDivDimension("#svgCanvas", "height")
+
+            svg
+							.attr("width", width + margin.left + margin.right)
+							.attr("height", height + margin.top + margin.bottom);
+
+            g
+							.attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+            pack
+							// .radius(myRoot, d => )
+							.size([width, height]);
+							// pack.radius(d => {
+							// 	console.log(d)
+							// 	return d.value
+							// }); 
+
+            let node = pack(myRoot);
+						let leaves = node.leaves();
+						let	ancestors = node.ancestors();
+
+						console.log('root', myRoot)
+
+            // console.log(leaves)
+            console.log(node.ancestors()[0].children)
+
+            const ancestorCircles = g.selectAll(".ancestor-circle")
+							// .data(ancestors[0].children, d => d.data.name);
+							.data(node.ancestors()[0].children, function(d) {
+									// console.log('ancestors', buttonId, d.data.name)
+									return d.data.name
+							})
+						console.log('ancestorCircles', ancestorCircles)
+
+            if (resizing){
+                ancestorCircles.exit()
+                    .attr("r", 1e-6)
+                    .remove();
+
+                ancestorCircles
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("r", d => d.r);
+            }
+            else {
+                ancestorCircles.exit()
+                    .transition().duration(duration / 2)
+                    .attr("r", 1e-6)
+                    .remove();
+
+                ancestorCircles
+                    .transition().duration(duration)
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("r", d => d.r);          
+            }
+
+            ancestorCircles.enter().append("circle")
+                .style("fill", "white")
+                .style("stroke","white")
+                .attr("class", "ancestor-circle")
+								.attr("stroke-opacity", 0.4 )
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", 1e-6)
+            .transition().duration(duration / 2)
+                .attr("r", d => d.r);
+						
+						// console.log(ancestorCircles)
+
+            const leafCircles = g.selectAll(".leaf-circle")
+                // .data(leaves, d => d.data.name);
+                .data(node.leaves(), function(d) {
+                    // console.log('leaves',d.data.access_now_ID)
+                    return d.data.access_now_ID
+                })
+
+            if (resizing){
+                leafCircles.exit()
+                    .attr("r", 1e-6)
+                    .remove();
+
+                leafCircles
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("r", d => d.r);
+            }
+            else {
+                leafCircles.exit()
+                    .transition().duration(duration / 2)
+                    .attr("r", 1e-6)
+                    .remove();
+
+                leafCircles
+                    .transition().duration(duration)
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("r", d => d.r);
+            }
+
+            leafCircles.enter().append("circle")
+                .style("fill", "white")
+                .style("stroke", "white")
+                .attr("class", "leaf-circle")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", 1e-6)
+            .transition().duration(duration)
+                .attr("r", d => d.r);
+
+						g.selectAll("text")
+							.data(node.ancestors()[0].children, d => d.data.name)
+							.join(
+								enter => enter.append("text")
+										.attr("fill", "black")
+										.attr("class", "group-label")
+										.attr("x", d => d.x + 1)
+										.attr("y", d => d.y + 1)
+										// .attr("transform", d => `translate(${d.x + 1},${d.y + d.r + 1})`)
+										.attr("opacity", 0)
+										.text(d => d.data.name)
+									.call(enter => enter.transition(duration)
+										.attr("opacity", 1)),
+								update => update
+										.attr("fill", "black")
+										// .attr("y", 0)
+										// .attr("transform", d => `translate(${d.x + 1},${d.y + d.r + 1})`)
+										.attr("x", d => d.x + 1)
+										.attr("y", d => d.y + 1)
+										.attr("opacity", 0)
+									.call(update => update.transition(duration * 2)
+										// .attr("x", (d, i) => i * 16)),
+										.attr("opacity", 1)),
+								exit => exit
+										.attr("fill", "brown")
+									.call(exit => exit.transition(duration/2)
+										// .attr("y", 30)
+										.attr("opacity", 0)
+										.remove())
+						);
+      }
+
+        // Generate random hierarchical data
+        function makeData() {
+            const dataObj = { }
+            dataObj["name"] = "root"
+            dataObj["children"] = categories.map(name => {
+                return {
+                name,
+                children: d3.range(randBetween(5, 10)).map((d, i) => {
+                    return {
+                    name: `${name}${i}`,
+                    value: randBetween(10, 100)
+                    }
+                })
+                }
+            })
+
+            console.log(dataObj)
+            return dataObj
+        }
+
+        function updateNodeGroups(data, byVar) {
+            const categoryArrayObj = data.reduce((obj, d, i) => {
+                // here we want to group elements according to the values they
+                // have in common for a particular key (that we select by the button)
+                // console.log(d[byVar])
+                if (obj[d[byVar]]){
+                    obj[d[byVar]].push(d);
+                } else {
+                    obj[d[byVar]] = [];
+                }
+                return obj
+                // console.log(d[byVar])
+            }, {})
+
+            console.log(categoryArrayObj)
+
+            const hierarchy_group_nodes = []
+            for (const property in categoryArrayObj) {
+                const newObj = {}
+                newObj['name'] = property
+                newObj['children'] = categoryArrayObj[property]
+                hierarchy_group_nodes.push(newObj)
+            }
+            console.log(hierarchy_group_nodes)
+
+            const updatedDataObj = {
+                'name': 'root',
+                'children': hierarchy_group_nodes
+            }
+            console.log(updatedDataObj)
+            return updatedDataObj
+        }
+
+				function updateCallout(byVar) {
+					document.getElementById("callout").innerHTML = calloutMap[byVar]
+				}
+
+				function updateButtons() {
+					// Toggle the bubble chart based on
+					// the currently clicked button.
+					updateNodeGroups(formatted, buttonId)
+					updateCallout(buttonId)
+					// root = d3.hierarchy(makeData())
+					//     .sum(d => d.value)
+					//     .sort((a, b) => a.value - b.value);
+					root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
+							.sum(d => d.radius)
+							// .sort((a, b) => a.value - b.value);
+					draw(false, root, buttonId);
+				}
+
+        ////// UI ELEMENTS ////////
+        function setupButtons() {
+					d3.select('#leftArrow')
+						.on('click', function() {
+							// Remove active class from all buttons
+							// d3.selectAll('.button').classed('active', false)
+							selectedIndex--
+							if (selectedIndex < 0) {
+								// d3.select(this).style("opacity", 0);
+								selectedIndex = 0
+							} else {
+								// d3.select(this).style("opacity", 1);
+							}
+							buttonId = selectedButtonIds[selectedIndex]
+							const selector = `${buttonId}`
+							// console.log(selector)
+							// d3.select(selector).classed('active', true)
+							// d3.select(selector).classed('focus', true)
+							document.getElementById(selector).focus();
+							// d3.select(`#${buttonId}`).classed('active', true)
+							console.log(buttonId, selectedIndex)
+							updateButtons()
+					})
+
+					d3.select('#rightArrow')
+						.on('click', function() {
+							// Remove active class from all buttons
+							// d3.selectAll('.button').classed('active', false).classed('focus', false)
+							selectedIndex++
+							if (selectedIndex > selectedButtonIds.length) {
+								// d3.select(this).style("opacity", 0);
+								selectedIndex = selectedButtonIds.length
+							}
+							buttonId = selectedButtonIds[selectedIndex]
+							const selector = `${buttonId}`
+							// console.log(selector)
+							// d3.select(selector).classed('active', true)
+							// d3.select(selector).classed('focus', true)
+							document.getElementById(selector).focus();
+							console.log(buttonId, selectedIndex)
+							updateButtons()
+					})
+
+					d3.selectAll('.button')
+						.on('click', function() {
+							// Remove active class from all buttons
+							d3.selectAll('.button').classed('active', false)
+							// Find the button just clicked
+							var button = d3.select(this)
+
+							// Set it as the active button
+							button.classed('active', true)
+							// button.classed('selected', true)
+
+							// Get the id of the button
+							buttonId = button.attr('id')
+
+							//Get selected Index
+							for (let i = 0; i < selectedButtonIds.length; i++) {
+								if (buttonId === selectedButtonIds[i]) {
+									selectedIndex = i
+								}
+							}
+
+							console.log(buttonId, selectedIndex)
+							updateButtons()
+						})
+        }
+        
+        setupButtons()
+				updateCallout("all")
+    
+    })
+
+      
+    //   d3.interval(_ => {
+    //     root = d3.hierarchy(makeData())
+    //       .sum(d => d.value)
+    //       .sort((a, b) => a.value - b.value);
+
+    //     draw();
+    //   }, duration * 2);
+      
+
+    
+
+      function randBetween(min, max){
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+    
+
+    
+    </script>
+  </body>
+</html>

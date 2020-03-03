@@ -1,0 +1,215 @@
+start_date,shutdown_status,end_date,country,sub_region,geo_scope,shutdown_type_new,affected_network,full or service-based,ordered_by,actual_cause,official_just,duration_affected_days,access_now_ID
+13-May-2019,Ended,17-May-2019,Sri Lanka,Southern Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Communal Violence,Fake News / Hate Speech / Incendiary Content or Promoting Violence,5,98
+11-Oct-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Communal Violence,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,187
+25-Jul-2019,Ended,30-Jul-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Communal Violence,Fake News / Hate Speech / Incendiary Content or Promoting Violence,6,163
+10-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Local government,Communal Violence,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,127
+08-Jan-2019,Ended,12-Jan-2019,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Communal Violence,Fake News / Hate Speech / Incendiary Content or Promoting Violence,5,11
+25-Aug-2019,Ended,26-Aug-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Communal Violence,Fake News / Hate Speech / Incendiary Content or Promoting Violence,2,175
+24-Jan-2019,Ended,25-Jan-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Local government,Communal Violence,Other,2,19
+13-Feb-2019,Ended,14-Feb-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Local government,Communal Violence,Other,2,33
+23-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,"Service-based, Full network",Local government,Communal Violence,Other,1,41
+11-May-2019,Ended,14-May-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Communal Violence,Other,4,95
+20-Apr-2019,Ended,20-Apr-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Communal Violence,Other,1,76
+20-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Communal Violence,Other,1,139
+16-Jul-2019,Ended,29-Jul-2019,Ethiopia,Eastern Africa,Level 2,Shutdown,Mobile,Full network,Executive government,Communal Violence,Public Safety / Quell Unrest / Restore Public Order,14,158
+15-Feb-2019,Ended,20-Feb-2019,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Communal Violence,Public Safety / Quell Unrest / Restore Public Order,6,35
+16-Apr-2019,Ended,17-Apr-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Communal Violence,Public Safety / Quell Unrest / Restore Public Order,2,73
+31-Dec-2018,Ended,20-Jan-2019,Congo (Democratic Republic of the),Middle Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Elections,Fake News / Hate Speech / Incendiary Content or Promoting Violence,21,5
+27-Apr-2019,Ended,29-Apr-2019,Benin,Western Africa,Level 3,Shutdown,"Broadband, Mobile","Service-based, Full network",Executive government,Elections,Fake News / Hate Speech / Incendiary Content or Promoting Violence,3,82
+22-May-2019,Ended,25-May-2019,Indonesia,South-Eastern Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Elections,Fake News / Hate Speech / Incendiary Content or Promoting Violence,4,109
+29-Apr-2019,Ended,30-Apr-2019,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Elections,Other,2,85
+11-Apr-2019,Unknown,,India,Southern Asia,Level 2,"Shutdown, Throttle",Mobile,Full network,State government,Elections,Other,1,70
+18-Apr-2019,Ended,19-Apr-2019,India,Southern Asia,Level 2,"Shutdown, Throttle","Broadband, Mobile",Full network,State government,Elections,Public Safety / Quell Unrest / Restore Public Order,2,75
+22-May-2019,Ended,23-May-2019,Malawi,Eastern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Non-government,Elections,Sabotage / Third-party Action,2,110
+11-Jun-2019,Ended,12-Jun-2019,Kazakhstan,Central Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Elections,Technical Problems / Infrastructure Failure,2,130
+09-Jun-2019,Ended,10-Jun-2019,Kazakhstan,Central Asia,Level 3,"Shutdown, Throttle","Broadband, Mobile",Service-based,Executive government,Elections,Technical Problems / Infrastructure Failure,2,125
+23-Jun-2019,Ended,04-Jul-2019,Mauritania,Western Africa,Level 3,Shutdown,Mobile,Full network,Executive government,Elections,Unknown,12,148
+09-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Elections,Unknown,1,124
+28-Jul-2019,Ended,07-Aug-2019,Syrian Arab Republic,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Unknown,Exam cheating,School Exams,11,165
+13-Jun-2019,Ended,30-Jun-2019,Syrian Arab Republic,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Unknown,Exam cheating,School Exams,18,132
+20-Jun-2019,Ended,25-Jun-2019,Algeria,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Exam cheating,School Exams,6,140
+27-Aug-2019,Ended,02-Sep-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Exam cheating,School Exams,7,176
+16-Jun-2019,Ended,20-Jun-2019,Algeria,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Exam cheating,School Exams,5,135
+01-Jun-2019,Ended,15-Jun-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,State government,Exam cheating,School Exams,15,117
+27-May-2019,Ended,31-May-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,State government,Exam cheating,School Exams,5,112
+14-May-2019,Ended,21-May-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,State government,Exam cheating,School Exams,8,99
+05-May-2019,Ended,06-May-2019,Sri Lanka,Southern Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Information Control,Fake News / Hate Speech / Incendiary Content or Promoting Violence,2,91
+21-Apr-2019,Ended,30-Apr-2019,Sri Lanka,Southern Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Information Control,Fake News / Hate Speech / Incendiary Content or Promoting Violence,10,77
+01-Jul-2019,Ended,01-Jul-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Information Control,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,152
+18-Jun-2019,Ended,18-Jun-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,137
+15-May-2019,Ended,15-May-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,100
+06-May-2019,Ended,06-May-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,92
+02-May-2019,Ended,03-May-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,2,88
+30-Apr-2019,Ended,30-Apr-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,86
+27-Apr-2019,Ended,27-Apr-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,83
+03-Mar-2019,Ended,03-Mar-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,46
+28-Feb-2019,Ended,28-Feb-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,42
+26-Jan-2019,Ended,26-Jan-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Information Control,Unknown,1,22
+22-May-2019,Ended,22-May-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,108
+11-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,129
+28-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,150
+03-Aug-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,168
+07-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,121
+27-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,164
+09-Nov-2019,Ended,09-Nov-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile","Service-based, Full network",Law enforcement,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,196
+21-Jan-2019,Unknown,,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,15
+07-Apr-2019,Ended,15-Apr-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,9,67
+10-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,28
+07-Mar-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,48
+10-Mar-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,49
+03-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,118
+12-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,131
+17-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,136
+18-Mar-2019,Unknown,,India,Southern Asia,Unknown,Shutdown,Mobile,Full network,State government,Other,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,53
+22-Jun-2019,Ended,05-Jul-2019,Ethiopia,Eastern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Other,National Security / Counter-Terrorism,14,143
+17-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Other,Unknown,1,160
+18-Feb-2019,Ended,19-Feb-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Unknown,2,36
+19-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Unknown,1,162
+23-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Other,1,147
+30-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Other,1,151
+29-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Other,Other,1,113
+12-May-2019,Ended,12-May-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,96
+03-Jan-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,8
+05-Jan-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,9
+22-Jan-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,17
+23-Jan-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,18
+12-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,32
+05-Mar-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,47
+06-Apr-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,66
+30-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,114
+31-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,116
+05-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Other,1,155
+14-Feb-2019,Ended,15-Feb-2019,India,Southern Asia,Level 2,"Shutdown, Throttle",Mobile,Full network,State government,Other,Other,2,34
+09-Apr-2019,Unknown,,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,69
+10-May-2019,Ended,11-May-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,2,94
+03-May-2019,Ended,07-May-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,5,89
+03-Apr-2019,Ended,04-Apr-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,2,64
+28-Mar-2019,Ended,28-Mar-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,60
+21-Mar-2019,Ended,22-Mar-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,2,56
+22-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,39
+20-Mar-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,55
+28-Mar-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,61
+01-Apr-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,62
+03-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,90
+17-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,103
+18-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,104
+31-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,115
+08-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,123
+11-Apr-2019,Ended,13-Apr-2019,India,Southern Asia,Unknown,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,3,71
+01-Mar-2019,Unknown,,India,Southern Asia,Unknown,Shutdown,"Broadband, Mobile",Full network,State government,Other,Other,1,45
+22-Mar-2019,Ended,24-Mar-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Service-based,State government,Other,Other,3,57
+19-Mar-2019,Unknown,,India,Southern Asia,Level 2,"Shutdown, Throttle",Mobile,Full network,State government,Other,Public Safety / Quell Unrest / Restore Public Order,1,54
+02-Jan-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Public Safety / Quell Unrest / Restore Public Order,1,7
+16-Mar-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Public Safety / Quell Unrest / Restore Public Order,1,51
+25-Apr-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Other,Public Safety / Quell Unrest / Restore Public Order,1,81
+20-Jun-2019,Unknown,,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Non-government,Other,Sabotage / Third-party Action,1,141
+12-Oct-2019,Ended,16-Oct-2019,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Non-government,Other,Sabotage / Third-party Action,5,190
+26-Jun-2019,Ended,26-Jun-2019,Iran (Islamic Republic of),Southern Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Unknown,Other,Technical Problems / Infrastructure Failure,1,149
+11-Oct-2019,Unknown,,Turkey,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Other,Unknown,1,188
+22-Jun-2019,Ended,23-Jun-2019,Cameroon,Middle Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Other,Unknown,2,142
+11-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Other,Unknown,1,128
+12-Jan-2019,Unknown,,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Other,Unknown,1,13
+01-Feb-2019,Unknown,,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Other,Unknown,1,24
+09-Jan-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Unknown,1,12
+06-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Unknown,1,27
+12-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Unknown,1,30
+14-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile","Service-based, Full network",State government,Other,Unknown,1,133
+16-May-2019,Unknown,,India,Southern Asia,Unknown,Unknown,Unknown,Unknown,State government,Other,Unknown,1,101
+05-Feb-2019,Unknown,,India,Southern Asia,Level 1,Unknown,Unknown,Unknown,State government,Other,Unknown,1,26
+22-Jun-2019,Ended,22-Aug-2019,Ethiopia,Eastern Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Political Instability,Fake News / Hate Speech / Incendiary Content or Promoting Violence,62,144
+05-Apr-2019,Ended,06-Apr-2019,India,Southern Asia,Level 2,"Shutdown, Throttle",Mobile,Full network,State government,Political Instability,Fake News / Hate Speech / Incendiary Content or Promoting Violence,2,65
+03-Aug-2019,Ended,15-Jan-2020,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,State government,Political Instability,Fake News / Hate Speech / Incendiary Content or Promoting Violence,166,169
+10-Jun-2019,Ended,18-Jun-2019,Ethiopia,Eastern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Political Instability,National Security / Counter-Terrorism,9,126
+22-Jun-2019,Ended,01-Sep-2019,Myanmar,South-Eastern Asia,Level 2,Shutdown,Mobile,Full network,Executive government,Political Instability,National Security / Counter-Terrorism,72,145
+22-Jun-2019,Unknown,,Myanmar,South-Eastern Asia,Level 1,Shutdown,Mobile,Full network,Executive government,Political Instability,National Security / Counter-Terrorism,1,146
+21-May-2019,Ended,29-May-2019,Tajikistan,Central Asia,Level 3,"Shutdown, Throttle","Broadband, Mobile","Service-based, Full network",Executive government,Political Instability,National Security / Counter-Terrorism,9,107
+07-Jan-2019,Ended,08-Jan-2019,Gabon,Middle Africa,Level 3,Shutdown,"Broadband, Mobile","Service-based, Full network",Executive government,Political Instability,Unknown,2,10
+01-Mar-2019,Unknown,,India,Southern Asia,Level 2,"Shutdown, Throttle","Broadband, Mobile",Full network,State government,Political Instability,Public Safety / Quell Unrest / Restore Public Order,1,44
+13-Aug-2019,Ended,14-Aug-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Political Instability,Unknown,2,172
+01-Mar-2019,Ended,01-Mar-2019,Algeria,Northern Africa,Level 3,"Shutdown, Throttle","Broadband, Mobile",Full network,Executive government,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,43
+02-Aug-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,Law enforcement,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,167
+22-Dec-2019,Ended,24-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,3,211
+19-Dec-2019,Ended,21-Dec-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,3,209
+18-Jul-2019,Ended,20-Jul-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,3,161
+02-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,153
+16-Jul-2019,Ended,17-Jul-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,2,159
+23-Feb-2019,Ended,01-Mar-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,7,40
+12-May-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,97
+10-Sep-2019,Unknown,,Bangladesh,Southern Asia,Level 1,Shutdown,Mobile,Full network,Executive government,Protest,National Security / Counter-Terrorism,1,180
+07-Sep-2019,Ended,07-Sep-2019,Pakistan,Southern Asia,Level 1,Shutdown,Mobile,Full network,Executive government,Protest,National Security / Counter-Terrorism,1,178
+02-Sep-2019,Ended,09-Sep-2019,Bangladesh,Southern Asia,Level 1,Throttle,Mobile,Full network,Executive government,Protest,National Security / Counter-Terrorism,8,177
+07-Apr-2019,Ended,08-Apr-2019,Sudan,Northern Africa,Level 1,Shutdown,"Broadband, Mobile",Service-based,Executive government,Protest,National Security / Counter-Terrorism,2,68
+16-Nov-2019,Ended,24-Nov-2019,Iran (Islamic Republic of),Southern Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Protest,National Security / Counter-Terrorism,9,199
+16-Nov-2019,Ended,23-Nov-2019,Iran (Islamic Republic of),Southern Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Protest,National Security / Counter-Terrorism,8,198
+03-Jun-2019,Ended,09-Jul-2019,Sudan,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Protest,National Security / Counter-Terrorism,37,119
+15-Jan-2019,Ended,24-Jan-2019,Zimbabwe,Eastern Africa,Level 3,"Shutdown, Throttle","Broadband, Mobile","Service-based, Full network",Executive government,Protest,National Security / Counter-Terrorism,10,14
+28-Mar-2018,Ended,13-Jul-2019,Chad,Middle Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Protest,National Security / Counter-Terrorism,473,1
+15-Jun-2019,Ended,25-Jun-2019,Eritrea,Eastern Africa,Level 3,Shutdown,Broadband,Service-based,Executive government,Protest,Unknown,11,134
+22-Sep-2019,Ended,23-Sep-2019,Egypt,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Protest,Unknown,2,182
+20-Dec-2018,Ended,10-Jan-2019,Jordan,Western Asia,Level 3,Throttle,"Broadband, Mobile",Service-based,Executive government,Protest,Unknown,22,3
+30-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Unknown,1,166
+08-Aug-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Unknown,1,171
+12-Feb-2019,Ended,13-Feb-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Local government,Protest,Other,2,31
+16-May-2019,Ended,24-May-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Protest,Other,9,102
+01-Apr-2019,Ended,02-Apr-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Other,2,63
+22-Aug-2019,Ended,05-Sep-2019,Indonesia,South-Eastern Asia,Level 2,Shutdown,Mobile,Full network,Executive government,Protest,Public Safety / Quell Unrest / Restore Public Order,15,174
+25-Sep-2019,Ended,28-Sep-2019,Indonesia,South-Eastern Asia,Level 1,Shutdown,Mobile,Full network,Executive government,Protest,Public Safety / Quell Unrest / Restore Public Order,4,183
+07-Jun-2019,Ended,08-Jun-2019,Liberia,Western Africa,Level 3,Shutdown,"Broadband, Mobile","Service-based, Full network",Executive government,Protest,Public Safety / Quell Unrest / Restore Public Order,2,122
+21-Dec-2018,Ended,26-Feb-2019,Sudan,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Protest,Public Safety / Quell Unrest / Restore Public Order,68,4
+20-Dec-2019,Ended,21-Dec-2019,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,2,210
+27-Dec-2019,Ended,28-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,2,213
+18-Dec-2019,Ended,18-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,1,208
+15-Dec-2019,Ended,15-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,1,207
+12-Dec-2019,Ended,13-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,2,205
+10-Dec-2019,Ended,11-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,2,202
+10-Dec-2019,Ended,11-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,2,203
+11-Dec-2019,Ended,11-Dec-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,1,204
+13-Dec-2019,Ended,13-Dec-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,1,206
+22-Dec-2019,Ended,22-Dec-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile","Service-based, Full network",Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,1,212
+18-May-2019,Ended,18-May-2019,United Kingdom of Great Britain and Northern Ireland,Northern Europe,Level 1,Shutdown,Unknown,Service-based,Law enforcement,Protest,Public Safety / Quell Unrest / Restore Public Order,1,105
+12-Feb-2019,Ended,17-Feb-2019,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,Local government,Protest,Public Safety / Quell Unrest / Restore Public Order,6,29
+05-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Protest,Public Safety / Quell Unrest / Restore Public Order,1,154
+26-Mar-2019,Ended,01-Apr-2019,Russian Federation,Eastern Europe,Level 1,Shutdown,"Broadband, Mobile",Full network,Executive government,Protest,Technical Problems / Infrastructure Failure,7,59
+09-May-2019,Ended,19-May-2019,Kazakhstan,Central Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Protest,Technical Problems / Infrastructure Failure,11,93
+12-Oct-2019,Ended,12-Oct-2019,Ecuador,South America,Level 3,Shutdown,Mobile,Full network,Executive government,Protest,Unknown,1,189
+25-Oct-2019,Ended,26-Oct-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile","Service-based, Full network",Executive government,Protest,Unknown,2,193
+01-May-2019,Ended,02-May-2019,Benin,Western Africa,Level 3,"Shutdown, Throttle","Broadband, Mobile","Service-based, Full network",Executive government,Protest,Unknown,2,87
+07-Oct-2019,Ended,07-Oct-2019,Ecuador,South America,Level 3,Throttle,"Broadband, Mobile",Service-based,Executive government,Protest,Unknown,1,186
+03-Aug-2019,Ended,03-Aug-2019,Russian Federation,Eastern Europe,Level 1,Shutdown,Mobile,Full network,Law enforcement,Protest,Unknown,1,170
+04-Nov-2019,Ended,11-Nov-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Unknown,Protest,Unknown,8,194
+16-Mar-2019,Unknown,,Russian Federation,Eastern Europe,Level 1,Shutdown,"Broadband, Mobile",Full network,Executive government,Protest,Unknown,1,52
+22-Feb-2019,Ended,23-Feb-2019,Algeria,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Executive government,Protest,Unknown,2,38
+21-Feb-2019,Ended,21-Feb-2019,Algeria,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Protest,Unknown,1,37
+15-Aug-2019,Ended,15-Aug-2019,Pakistan,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Unknown,Protest,Unknown,1,173
+14-Sep-2019,Ended,15-Sep-2019,Algeria,Northern Africa,Level 3,Shutdown,"Broadband, Mobile",Full network,Unknown,Protest,Unknown,2,181
+16-Nov-2019,Ended,16-Nov-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Protest,Unknown,1,200
+21-Jan-2019,Ended,21-Jan-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Protest,Unknown,1,16
+22-Oct-2019,Ended,23-Oct-2019,Pakistan,Southern Asia,Level 2,Shutdown,Mobile,Full network,Executive government,Protest,Unknown,2,192
+19-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Religious holiday/anniversary,Fake News / Hate Speech / Incendiary Content or Promoting Violence,1,138
+05-Jun-2019,Ended,07-Jun-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Religious holiday/anniversary,Fake News / Hate Speech / Incendiary Content or Promoting Violence,3,120
+08-Sep-2019,Ended,10-Sep-2019,Pakistan,Southern Asia,Level 3,Shutdown,Mobile,Full network,Executive government,Religious holiday/anniversary,National Security / Counter-Terrorism,3,179
+23-Mar-2019,Ended,23-Mar-2019,Pakistan,Southern Asia,Level 2,Shutdown,Mobile,Full network,Executive government,Religious holiday/anniversary,National Security / Counter-Terrorism,1,58
+20-May-2019,Ended,31-May-2019,China,Eastern Asia,Level 2,Throttle,"Broadband, Mobile","Service-based, Full network",Unknown,Religious holiday/anniversary,Unknown,12,106
+10-Nov-2019,Ended,11-Nov-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Law enforcement,Religious holiday/anniversary,Other,2,197
+26-Jan-2019,Ended,27-Jan-2019,India,Southern Asia,Level 2,Shutdown,Mobile,Full network,State government,Religious holiday/anniversary,Other,2,21
+24-May-2019,Ended,25-May-2019,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,State government,Religious holiday/anniversary,Other,2,111
+01-Jan-2019,Ended,02-Jan-2019,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Religious holiday/anniversary,Other,2,6
+08-Jul-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,State government,Religious holiday/anniversary,Other,1,156
+31-Dec-2019,Ended,02-Jan-2020,Bangladesh,Southern Asia,Level 3,Shutdown,Mobile,Full network,Executive government,Unknown,National Security / Counter-Terrorism,3,214
+17-Oct-2018,Ended,17-Mar-2019,Yemen,Western Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Non-government,Unknown,Sabotage / Third-party Action,152,2
+06-Nov-2019,Ended,06-Nov-2019,Yemen,Western Asia,Level 2,Shutdown,Broadband,Full network,Unknown,Unknown,Technical Problems / Infrastructure Failure,1,195
+22-Nov-2019,Unknown,,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Unknown,Unknown,Technical Problems / Infrastructure Failure,1,201
+27-Apr-2019,Ended,28-Apr-2019,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Non-government,Unknown,Technical Problems / Infrastructure Failure,2,84
+23-Apr-2019,Ended,08-May-2019,Tajikistan,Central Asia,Level 3,Unknown,Unknown,Service-based,Executive government,Unknown,Unknown,16,79
+29-Jan-2019,Unknown,,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Non-government,Unknown,Unknown,1,23
+12-Apr-2019,Unknown,,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Non-government,Unknown,Unknown,1,72
+11-Mar-2019,Unknown,,Yemen,Western Asia,Level 1,Shutdown,"Broadband, Mobile",Service-based,Non-government,Unknown,Unknown,1,50
+17-Apr-2019,Ended,01-May-2019,Yemen,Western Asia,Level 1,Shutdown,Broadband,Full network,Unknown,Unknown,Unknown,15,74
+08-Jul-2019,Unknown,,Yemen,Western Asia,Level 1,Shutdown,"Broadband, Mobile",Full network,Unknown,Unknown,Unknown,1,157
+15-Oct-2019,Ended,15-Oct-2019,Turkey,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Unknown,Unknown,1,191
+25-Jan-2019,Ended,25-Jan-2019,Venezuela (Bolivarian Republic of),South America,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Unknown,Unknown,1,20
+24-Apr-2019,Ended,25-Apr-2019,India,Southern Asia,Level 2,Unknown,Unknown,Service-based,Unknown,Unknown,Unknown,2,80
+22-Apr-2019,Ended,24-Apr-2019,India,Southern Asia,Level 2,Unknown,Unknown,Service-based,Unknown,Unknown,Unknown,3,78
+03-Oct-2019,Ended,10-Oct-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Full network,Unknown,Unknown,Unknown,8,185
+02-Oct-2019,Ended,21-Nov-2019,Iraq,Western Asia,Level 3,Shutdown,"Broadband, Mobile",Service-based,Unknown,Unknown,Unknown,51,184
+03-Feb-2019,Ended,04-Feb-2019,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Visits by Government Officials,Other,2,25
