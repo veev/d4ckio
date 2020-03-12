@@ -10,7 +10,7 @@
       }
 			.container {
 				height: 100%;
-				width: 70%;
+				width: 90%;
 				margin: 0 auto;
 			}
 			.headerNav {
@@ -68,7 +68,7 @@
 				/* width: 70%; */
 				display: block;
 				font-family: 'Source Serif Pro', serif;
-				font-size: 1.5em;
+				font-size: 1.5rem;
 				text-align: center;
 			}
       #callout > .highlight {
@@ -93,22 +93,41 @@
 				padding-left: 5px;
 				padding-right: 10px;
 			}
+			.legendTitle {
+				text-transform: uppercase;
+				font-weight: 800;
+				margin-right: 10px;
+			}
 			.legendCircle {
-				background-color:white;
+				/* background-color:white; */
 				border-radius: 50%;
-				margin: auto 0;
-			}
-			#nationalCircle {
-				width: 15px;
-				height: 15px;
-			}
-			#regionalCircle {
+				/* margin: auto 0; */
+				margin: 2px 0px 0px 0px;
 				width: 12px;
 				height: 12px;
 			}
+			#nationalCircle {
+				/* width: 15px;
+				height: 15px; */
+				background-color: #bf1b32;
+			}
+			#regionalCircle {
+				/* width: 12px;
+				height: 12px; */
+				background-color: #ff7a91;
+			}
 			#localCircle {
-				width: 9px;
-				height: 9px;
+				/* width: 9px;
+				height: 9px; */
+				background-color: white;
+			}
+			#unknownCircle {
+				/* width: 9px;
+				height: 9px; */
+				border:1px solid white;
+				width: 12px;
+				height: 12px;
+				background-color: #FF254A;
 			}
 			.buttonGroup {
 				margin:0 auto;
@@ -128,7 +147,7 @@
 				text-decoration:none;
 			}
 			.button:hover {
-				background-color:black;
+				background-color:#7d7d7d;
 				color: white;
 			}
 			.button:active {
@@ -142,10 +161,11 @@
 				color: white;
     		outline: none; 
 			}
-			/* .button .selected {
+			.button.selected {
 				background-color:black;
 				color: white;
-			} */
+				outline: none;
+			}
 			#svgCanvas {
 				position: relative;
 				height: 65vh;
@@ -178,12 +198,15 @@
       <div id="svgCanvas"></div>
 			<div class="menu">
 				<div class="legend">
+					<div class="legendTitle">Shutdown Scope</div>
 					<div id="nationalCircle" class="legendCircle"></div>
 					<div class="legendLabel">National</div>
 					<div id="regionalCircle" class="legendCircle"></div>
 					<div class="legendLabel">Regional</div>
 					<div id="localCircle" class="legendCircle"></div>
 					<div class="legendLabel">Local</div>
+					<div id="unknownCircle" class="legendCircle"></div>
+					<div class="legendLabel">Unknown</div>
 				</div>
 				<div class="buttonGroup">
 					<button id="all" class="button active">All</button>
@@ -208,14 +231,15 @@
 				"all": 'In 2019, <span class="highlight">1707</span> days of internet access were disrupted by <span class="highlight">214</span> internet shutdowns across <span class="highlight">33</span> countries.',
 				"sub_region": 'The subregion most affected by internet shutdowns is <span class="highlight">Southern Asia</span>. In 2019, <span class="highlight">122</span> shutdowns were recorded in <span class="highlight">India</span>.',
 				"actual_cause": '<span class="highlight">Protests</span> are the top known cause of internet and network shutdowns.',
-				"ordered_by": 'From <span class="highlight">central governments</span> to <span class="highlight">local administrations</span>, many have the power to order an internet shutdown.',
-				"official_just": '<span class="highlight">Public safety</span>, <span class="highlight">national security</span>, or <span class="highlight">stopping fake news</span> are commonly used to justify shutdowns designed to prevent protests.',
-				"shutdown_type_new": 'Speed <span class="highlight">throttling</span> is more subtle than a <span class="highlight">full network shutdown</span> and is more likely to go undetected. In 2019, the #KeepItOn Shutdown Tracker Optimisation Project (STOP) recorded <span class="highlight">205</span> cases of shutdowns and <span class="highlight">15</span> cases of throttling.',
-				"affected_network": '<span class="highlight">62%</span> of the shutdowns recorded by STOP in 2019 affected both <span class="highlight">broadband</span> and <span class="highlight">mobile networks</span>.'
+				"ordered_by": 'From central governments to local administrations, many have the power to order an internet shutdown.',
+				"official_just": 'Public safety, national security, or stopping fake news are commonly used to justify shutdowns designed to prevent protests.',
+				"shutdown_type_new": 'Speed throttling is more subtle than a full network shutdown and is more likely to go undetected. In 2019, the #KeepItOn Shutdown Tracker Optimisation Project (STOP) recorded <span class="highlight">205</span> cases of shutdowns and <span class="highlight">15</span> cases of throttling.',
+				"affected_network": '<span class="highlight">62%</span> of the shutdowns recorded by STOP in 2019 affected both broadband and mobile networks.'
 			}
 
 			const selectedButtonIds = ["all", "sub_region", "actual_cause", "ordered_by", "official_just", "shutdown_type_new", "affected_network"]
 			let selectedIndex = 0
+			const lineHeight = 12
       // const margin = {
 			// 	left: innerWidth * 0.1, 
 			// 	right: innerWidth * 0.1, 
@@ -231,7 +255,7 @@
           duration = 1000,
           categories = "abcdefg".split(""),
         //   colors = {},
-          radius = 2;
+          radius = 6;
           let buttonId = 'all'
 
     //   categories.forEach((d, i) => {
@@ -243,6 +267,9 @@
 
       const pack = d3.pack()
           .padding(d => d.height * 30);
+
+			// add tooltip
+			d3.select('body').append('div').attr('id', 'tooltip').attr('style', 'position: absolute; opacity: 0;');
 
     d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
         console.log(data)
@@ -269,14 +296,30 @@
                 // create new leaner obj
                 // set radius based on geo_scope
                 if (d.geo_scope === 'Unknown') {
-                    d.radius = radius * 1
+                    d.radius = radius// * 1
                 } else if (d.geo_scope === 'Level 1') {
-                    d.radius = radius * 2
+                    d.radius = radius// * 2
                 } else if (d.geo_scope === 'Level 2') {
-                    d.radius = radius * 3
+                    d.radius = radius// * 3
                 } else if (d.geo_scope === 'Level 3') {
-                    d.radius = radius * 4
+                    d.radius = radius// * 4
                 }
+								if (d.official_just === 'Fake News / Hate Speech / Incendiary Content or Promoting Violence') {
+									d.official_just = 'Hate Speech / Information Control'
+								} else if (d.official_just === 'Public Safety / Quell Unrest / Restore Public Order') {
+									d.official_just = 'Public Safety and Order'
+								} else if (d.official_just === 'National Security / Counter-Terrorism') {
+									d.official_just = 'National Security'
+								} else if (d.official_just === 'Sabotage / Third-party Action') {
+									d.official_just = 'Third-party Action'
+								} else if (d.official_just === 'Technical Problems / Infrastructure Failure') {
+									d.official_just = 'Technical Problems'
+								} else {
+									d.official_just = d.official_just
+								}
+								if (d.actual_cause === 'Religious holiday/anniversary') {
+									d.actual_cause = 'Religious Holiday'
+								}
                 d.access_now_ID = +d.access_now_ID
                 d.duration_affected_days = +d.duration_affected_days
                 // set starting position in center of svg
@@ -296,7 +339,7 @@
 
 						// get the dom element width
 						function getDivDimension (div, dim) {
-							console.log(div, dim)
+							// console.log(div, dim)
 							const dimension = d3.select(div)
 								// get the width of div element
 								.style(dim)
@@ -328,10 +371,10 @@
 						let leaves = node.leaves();
 						let	ancestors = node.ancestors();
 
-						console.log('root', myRoot)
+						// console.log('root', myRoot)
 
             // console.log(leaves)
-            console.log(node.ancestors()[0].children)
+            // console.log(node.ancestors()[0].children)
 
             const ancestorCircles = g.selectAll(".ancestor-circle")
 							// .data(ancestors[0].children, d => d.data.name);
@@ -339,7 +382,7 @@
 									// console.log('ancestors', buttonId, d.data.name)
 									return d.data.name
 							})
-						console.log('ancestorCircles', ancestorCircles)
+						// console.log('ancestorCircles', ancestorCircles)
 
             if (resizing){
                 ancestorCircles.exit()
@@ -408,8 +451,28 @@
             }
 
             leafCircles.enter().append("circle")
-                .style("fill", "white")
-                .style("stroke", "white")
+                .style("fill", d => {
+                  if (d.data.geo_scope === 'Unknown') {
+                    return "#ff254a"
+                  } else if (d.data.geo_scope === 'Level 1') {
+                    return "white"
+                  } else if (d.data.geo_scope === 'Level 2') {
+                    return "#ff7a91"
+                  } else if (d.data.geo_scope === 'Level 3') {
+                    return "#bf1b32"
+                  }
+                })
+                .style("stroke", d => {
+                  if (d.data.geo_scope === 'Unknown') {
+                    return "white"
+                  } else if (d.data.geo_scope === 'Level 1') {
+                    return "white"
+                  } else if (d.data.geo_scope === 'Level 2') {
+                    return "#ff7a91"
+                  } else if (d.data.geo_scope === 'Level 3') {
+                    return "#bf1b32"
+                  }
+                })
                 .attr("class", "leaf-circle")
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y)
@@ -417,29 +480,54 @@
             .transition().duration(duration)
                 .attr("r", d => d.r);
 
+							// svg.append("text")
+							// 	.attr("transform", `translate(${width / 2},${height / 2}) scale(${radius / textRadius})`)
+							// .selectAll("tspan")
+							// .data(lines)
+							// .enter().append("tspan")
+							// 	.attr("x", 0)
+							// 	.attr("y", (d, i) => (i - lines.length / 2 + 0.8) * lineHeight)
+							// 	.text(d => d.text)
+							// svg.append("text")
+							// 	.attr("transform", `translate(${width / 2},${height / 2}) scale(${radius / textRadius})`)
+							// .selectAll("tspan")
+							// .data(lines)
+							// .enter().append("tspan")
+							// 	.attr("x", 0)
+							// 	.attr("y", (d, i) => (i - lines.length / 2 + 0.8) * lineHeight)
+							// 	.text(d => d.text);
+
 						g.selectAll("text")
 							.data(node.ancestors()[0].children, d => d.data.name)
 							.join(
 								enter => enter.append("text")
+										// .enter().append("tspan")
 										.attr("fill", "black")
 										.attr("class", "group-label")
+										.attr("text-anchor", "middle")
 										.attr("x", d => d.x + 1)
 										.attr("y", d => d.y + 1)
+										.attr("dy", -1)//set the dy here
+										// .attr("y", (d, i) => {
+										// 	return	d.y + (i - getLabelLines(getLabelWords(d.data.name), d.data.name).length / 2 + 0.8) * lineHeight
+										// })
 										// .attr("transform", d => `translate(${d.x + 1},${d.y + d.r + 1})`)
 										.attr("opacity", 0)
 										.text(d => d.data.name)
+										// .call(wrap, d => 30)
 									.call(enter => enter.transition(duration)
-										.attr("opacity", 1)),
+										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, 30),
 								update => update
 										.attr("fill", "black")
 										// .attr("y", 0)
 										// .attr("transform", d => `translate(${d.x + 1},${d.y + d.r + 1})`)
 										.attr("x", d => d.x + 1)
 										.attr("y", d => d.y + 1)
+										.attr("dy", -1)//set the dy here
 										.attr("opacity", 0)
 									.call(update => update.transition(duration * 2)
 										// .attr("x", (d, i) => i * 16)),
-										.attr("opacity", 1)),
+										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, 30),
 								exit => exit
 										.attr("fill", "brown")
 									.call(exit => exit.transition(duration/2)
@@ -447,7 +535,9 @@
 										.attr("opacity", 0)
 										.remove())
 						);
-      }
+						g.selectAll(".group-label text")
+							.call(wrap, d => d.r)
+						}
 
         // Generate random hierarchical data
         function makeData() {
@@ -465,7 +555,7 @@
                 }
             })
 
-            console.log(dataObj)
+            // console.log(dataObj)
             return dataObj
         }
 
@@ -477,13 +567,13 @@
                 if (obj[d[byVar]]){
                     obj[d[byVar]].push(d);
                 } else {
-                    obj[d[byVar]] = [];
+                    obj[d[byVar]] = [d];
                 }
                 return obj
                 // console.log(d[byVar])
             }, {})
 
-            console.log(categoryArrayObj)
+            // console.log(categoryArrayObj)
 
             const hierarchy_group_nodes = []
             for (const property in categoryArrayObj) {
@@ -492,13 +582,13 @@
                 newObj['children'] = categoryArrayObj[property]
                 hierarchy_group_nodes.push(newObj)
             }
-            console.log(hierarchy_group_nodes)
+            // console.log(hierarchy_group_nodes)
 
             const updatedDataObj = {
                 'name': 'root',
                 'children': hierarchy_group_nodes
             }
-            console.log(updatedDataObj)
+            // console.log(updatedDataObj)
             return updatedDataObj
         }
 
@@ -522,43 +612,42 @@
 
         ////// UI ELEMENTS ////////
         function setupButtons() {
+					// set the "all group" to be selected by default
+					document.getElementById(`${buttonId}`).classList.add("selected")
 					d3.select('#leftArrow')
 						.on('click', function() {
+							d3.selectAll('.button').classed('selected', false)
 							// Remove active class from all buttons
 							// d3.selectAll('.button').classed('active', false)
 							selectedIndex--
 							if (selectedIndex < 0) {
-								// d3.select(this).style("opacity", 0);
 								selectedIndex = 0
-							} else {
-								// d3.select(this).style("opacity", 1);
 							}
 							buttonId = selectedButtonIds[selectedIndex]
 							const selector = `${buttonId}`
-							// console.log(selector)
-							// d3.select(selector).classed('active', true)
-							// d3.select(selector).classed('focus', true)
-							document.getElementById(selector).focus();
-							// d3.select(`#${buttonId}`).classed('active', true)
+							console.log(selector)
+							document.getElementById(selector).classList.add("selected")
+							// document.getElementById(selector).focus();
 							console.log(buttonId, selectedIndex)
 							updateButtons()
 					})
 
 					d3.select('#rightArrow')
 						.on('click', function() {
+							d3.selectAll('.button').classed('selected', false)
 							// Remove active class from all buttons
 							// d3.selectAll('.button').classed('active', false).classed('focus', false)
 							selectedIndex++
 							if (selectedIndex > selectedButtonIds.length) {
-								// d3.select(this).style("opacity", 0);
-								selectedIndex = selectedButtonIds.length
+								selectedIndex = selectedButtonIds.length - 1
 							}
 							buttonId = selectedButtonIds[selectedIndex]
 							const selector = `${buttonId}`
-							// console.log(selector)
+							console.log(selector)
+							document.getElementById(selector).classList.add("selected")
 							// d3.select(selector).classed('active', true)
 							// d3.select(selector).classed('focus', true)
-							document.getElementById(selector).focus();
+							// document.getElementById(selector).focus();
 							console.log(buttonId, selectedIndex)
 							updateButtons()
 					})
@@ -566,12 +655,14 @@
 					d3.selectAll('.button')
 						.on('click', function() {
 							// Remove active class from all buttons
-							d3.selectAll('.button').classed('active', false)
+							// d3.selectAll('.button').classed('active', false)
+							d3.selectAll('.button').classed('selected', false)
 							// Find the button just clicked
 							var button = d3.select(this)
-
+							button.classed('selected', true)
 							// Set it as the active button
-							button.classed('active', true)
+							// button.classed('active', true)
+							// button.classed('focus', true)
 							// button.classed('selected', true)
 
 							// Get the id of the button
@@ -581,12 +672,15 @@
 							for (let i = 0; i < selectedButtonIds.length; i++) {
 								if (buttonId === selectedButtonIds[i]) {
 									selectedIndex = i
+								} else {
+
 								}
 							}
 
 							console.log(buttonId, selectedIndex)
 							updateButtons()
 						})
+						
         }
         
         setupButtons()
@@ -603,12 +697,81 @@
     //     draw();
     //   }, duration * 2);
       
-
-    
-
       function randBetween(min, max){
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
+
+			function wrap(text, width) {
+				text.each(function() {
+					var text = d3.select(this),
+							words = text.text().split(/\s+/).reverse(),
+							word,
+							line = [],
+							lineNumber = 0,
+							lineHeight = 1.1, // ems
+							y = text.attr("y"),
+							x = text.attr("x")
+							dy = parseFloat(text.attr("dy")),
+							tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+					console.log(x, y, dy)
+					while (word = words.pop()) {
+						line.push(word);
+						tspan.text(line.join(" "));
+						if (tspan.node().getComputedTextLength() > width) {
+							line.pop();
+							tspan.text(line.join(" "));
+							line = [word];
+							tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+						}
+					}
+				});
+			}
+
+			function getLabelWords(text) {
+				const words = text.split(/\s+/g); // To hyphenate: /\s+|(?<=-)/
+				if (!words[words.length - 1]) words.pop();
+				if (!words[0]) words.shift();
+				return words;
+			}
+
+			function measureWidth(text) {
+				const context = document.createElement("canvas").getContext("2d");
+				return text => context.measureText(text).width;
+			}
+
+			function getTargetWidth(text) {
+				return  Math.sqrt(measureWidth(text.trim()) * lineHeight)
+			}
+
+			
+			function getLabelLines(words, text) {
+				let line;
+				let lineWidth0 = Infinity;
+				const lines = [];
+				for (let i = 0, n = words.length; i < n; ++i) {
+					let lineText1 = (line ? line.text + " " : "") + words[i];
+					let lineWidth1 = measureWidth(lineText1);
+					if ((lineWidth0 + lineWidth1) / 2 < getTargetWidth(text)) {
+						line.width = lineWidth0 = lineWidth1;
+						line.text = lineText1;
+					} else {
+						lineWidth0 = measureWidth(words[i]);
+						line = {width: lineWidth0, text: words[i]};
+						lines.push(line);
+					}
+				}
+				return lines;
+			}
+
+			function getTextRadius(lines) {
+				let radius = 0;
+				for (let i = 0, n = lines.length; i < n; ++i) {
+					const dy = (Math.abs(i - n / 2 + 0.5) + 0.5) * lineHeight;
+					const dx = lines[i].width / 2;
+					radius = Math.max(radius, Math.sqrt(dx ** 2 + dy ** 2));
+				}
+				return radius;
+			}
 
     
 
