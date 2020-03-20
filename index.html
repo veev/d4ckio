@@ -253,7 +253,7 @@
 				bottom: 0
 				},
           duration = 1000,
-          categories = "abcdefg".split(""),
+          // categories = "abcdefg".split(""),
         //   colors = {},
           radius = 6;
           let buttonId = 'all'
@@ -283,6 +283,11 @@
         
         let root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
             .sum(d => d.radius)
+						.sort((a,b) => {
+								console.log(a, b)
+								return a.data.geo_scope_val - b.data.geo_scope_val
+							});
+						// .sort((a,b) => a.geo_scope_val - b.geo_scope_val)
     
         console.log(root)
 
@@ -296,13 +301,17 @@
                 // create new leaner obj
                 // set radius based on geo_scope
                 if (d.geo_scope === 'Unknown') {
-                    d.radius = radius// * 1
+                    // d.radius = radius// * 1
+										d.geo_scope_val = 0
                 } else if (d.geo_scope === 'Level 1') {
-                    d.radius = radius// * 2
+                    // d.radius = radius// * 1
+										d.geo_scope_val = 1
                 } else if (d.geo_scope === 'Level 2') {
-                    d.radius = radius// * 3
+                    // d.radius = radius// * 3
+										d.geo_scope_val = 2
                 } else if (d.geo_scope === 'Level 3') {
-                    d.radius = radius// * 4
+                    // d.radius = radius// * 4
+										d.geo_scope_val = 3
                 }
 								if (d.official_just === 'Fake News / Hate Speech / Incendiary Content or Promoting Violence') {
 									d.official_just = 'Hate Speech / Information Control'
@@ -322,6 +331,7 @@
 								}
                 d.access_now_ID = +d.access_now_ID
                 d.duration_affected_days = +d.duration_affected_days
+								d.radius = radius
                 // set starting position in center of svg
                 // d.focusX = width / 2
                 // d.focusY = height / 2
@@ -540,24 +550,24 @@
 						}
 
         // Generate random hierarchical data
-        function makeData() {
-            const dataObj = { }
-            dataObj["name"] = "root"
-            dataObj["children"] = categories.map(name => {
-                return {
-                name,
-                children: d3.range(randBetween(5, 10)).map((d, i) => {
-                    return {
-                    name: `${name}${i}`,
-                    value: randBetween(10, 100)
-                    }
-                })
-                }
-            })
+        // function makeData() {
+        //     const dataObj = { }
+        //     dataObj["name"] = "root"
+        //     dataObj["children"] = categories.map(name => {
+        //         return {
+        //         name,
+        //         children: d3.range(randBetween(5, 10)).map((d, i) => {
+        //             return {
+        //             name: `${name}${i}`,
+        //             value: randBetween(10, 100)
+        //             }
+        //         })
+        //         }
+        //     })
 
-            // console.log(dataObj)
-            return dataObj
-        }
+        //     // console.log(dataObj)
+        //     return dataObj
+        // }
 
         function updateNodeGroups(data, byVar) {
             const categoryArrayObj = data.reduce((obj, d, i) => {
@@ -605,8 +615,14 @@
 					//     .sum(d => d.value)
 					//     .sort((a, b) => a.value - b.value);
 					root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
-							.sum(d => d.radius)
-							// .sort((a, b) => a.value - b.value);
+							.sum(d => {
+								console.log(d)
+								return d.radius
+							})
+							.sort((a,b) => {
+								console.log(a, b)
+								return a.data.geo_scope_val - b.data.geo_scope_val
+							});
 					draw(false, root, buttonId);
 				}
 
