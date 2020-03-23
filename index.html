@@ -197,8 +197,9 @@
 				background: rgba(255,255,255,1);
 				box-shadow: 0 0 10px gray;
 				pointer-events: none;
+				/* border: 1px solid #c2c2c2; */
 			}
-			div.tooltip:after {
+			/* div.tooltip:after {
 				right: 100%;
 				top: 50%;
 				border: solid transparent;
@@ -211,6 +212,34 @@
 				border-right-color: #ffffff;
 				border-width: 10px;
 				margin-top: -10px;
+			}
+			.arrow_box {
+				position: relative;
+				background: #ffffff;
+				border: 1px solid #c2c2c2;
+			} */
+			div.tooltip:after, div.tooltip:before {
+				right: 100%;
+				top: 50%;
+				border: solid transparent;
+				content: " ";
+				height: 0;
+				width: 0;
+				position: absolute;
+				pointer-events: none;
+			}
+
+			div.tooltip:after {
+				border-color: rgba(255, 255, 255, 0);
+				border-right-color: #ffffff;
+				border-width: 10px;
+				margin-top: -10px;
+			}
+			div.tooltip:before {
+				border-color: rgba(194, 194, 194, 0);
+				border-right-color: #c2c2c2;
+				border-width: 11px;
+				margin-top: -11px;
 			}
     </style>
   </head>
@@ -435,9 +464,10 @@
 									.attr("stroke-opacity", 0.4 )
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
-									.attr("r", 1e-6)
+									.attr("r", d => d.r)
+									.attr("opacity", 0)
 								.call(enter => enter.transition(t)
-                	.attr("r", d => d.r)	
+								.attr("opacity", 1)	
 								),
 								update => update
 									.attr("cx", d => d.x)
@@ -484,9 +514,10 @@
 									.attr("class", "leaf-circle")
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
-									.attr("r", 1e-6)
-								.call(enter => enter.transition(t)
 									.attr("r", d => d.r)
+									.attr("opacity", 0)
+								.call(enter => enter.transition(t)
+									.attr("opacity", 1)
 								),
 								update => update
 									.call(update => update.transition(t)
@@ -505,9 +536,11 @@
 							.data(node.leaves(), d =>  d.data.access_now_ID)
 							.join(
 								enter => enter.append("circle")
-									.style("fill", "green")
-									.style("stroke", "green")
-									.attr("opacity", 0)
+									.style("fill", "white")
+									.style("stroke", "black")
+									.style("stroke-width", "2px")
+									.attr("fill-opacity", 0)
+									.attr("stroke-opacity", 0)
 									.attr("class", "leaf-circle-rollover")
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
@@ -529,19 +562,21 @@
 							)
 
 							d3.selectAll(".leaf-circle-rollover")
-								.on('mouseover', function(d) {
-									// console.log('mouseover', d)
+								.on('mousemove', function(d) {
+									console.log('mousemove', d3.select(this))
 									div
 										.transition()
 										.duration(200)
 										.style('opacity', 1);
 									div
 										.html(makeTooltipInfo(d))
-										.style('left', d3.event.pageX + 'px')
-										.style('top', d3.event.pageY - 28 + 'px');
+										.style('left', d3.event.pageX + 14 + 'px')
+										.style('top', d3.event.pageY - 78 + 'px');
 									d3.select(this).style("cursor", "pointer");
+									d3.select(this).attr("stroke-opacity", 1)
 								})
 								.on('mouseout', function() {
+									d3.select(this).attr("stroke-opacity", 0)
 									div
 										.transition()
 										.duration(500)
@@ -592,7 +627,6 @@
 
 				// Make tooltip html
 				function makeTooltipInfo(d) {
-					
 					let html = '';
 					if (d.data.duration_affected_days) {
 						html += '<b>Affected Days</b> ' + d.data.duration_affected_days
@@ -627,7 +661,7 @@
 					if (d.data.access_now_ID) {
 						html += '<br><b>ID</b> ' + d.data.access_now_ID
 					}
-					console.log(html.toString())
+					// console.log(html.toString())
 					return `${html.toString()}`
 				}
 
