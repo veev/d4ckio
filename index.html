@@ -2,7 +2,7 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap" rel="stylesheet">
     <style>
       body {
         margin: 0;
@@ -86,7 +86,7 @@
 				height: 20px;
 				justify-content: center;
 				padding-bottom: 20px;
-				font-family:'Source Sans Pro', serif;
+				font-family:'Source Sans Pro', sans-serif;
 				font-size:12px;
 			}
 			.legendLabel {
@@ -140,7 +140,7 @@
 				display:inline-block;
 				cursor:pointer;
 				color:black;
-				font-family:'Source Sans Pro', serif;
+				font-family:'Source Sans Pro', sans-serif;
 				font-size:12px;
 				padding:5px 12px;
 				margin: 1px 1px 5px 1px;
@@ -183,8 +183,34 @@
         stroke-width: 1.5px;
       }
 			.group-label {
-				font-family:'Source Sans Pro', serif;
+				font-family:'Source Sans Pro', sans-serif;
 				font-size:14px;
+			}
+			div.tooltip {
+				color: black;
+				position: relative;
+				text-align: left;
+				/* width: 120px; */
+				/* height: 28px; */
+				padding: 8px;
+				font: 10px 'Source Sans Pro', sans-serif;
+				background: rgba(255,255,255,1);
+				box-shadow: 0 0 10px gray;
+				pointer-events: none;
+			}
+			div.tooltip:after {
+				right: 100%;
+				top: 50%;
+				border: solid transparent;
+				content: " ";
+				height: 0;
+				width: 0;
+				position: absolute;
+				pointer-events: none;
+				border-color: rgba(255, 255, 255, 0);
+				border-right-color: #ffffff;
+				border-width: 10px;
+				margin-top: -10px;
 			}
     </style>
   </head>
@@ -256,6 +282,7 @@
           // categories = "abcdefg".split(""),
         //   colors = {},
           radius = 6;
+					
           let buttonId = 'all'
 
     //   categories.forEach((d, i) => {
@@ -264,12 +291,13 @@
 
       const svg = d3.select("#svgCanvas").append("svg");
       const g = svg.append("g");
-
+			const lg = svg.append("g")
+			
       const pack = d3.pack()
           .padding(d => d.height * 30);
 
 			// add tooltip
-			d3.select('body').append('div').attr('id', 'tooltip').attr('style', 'position: absolute; opacity: 0;');
+			const div = d3.select('body').append('div').attr('class', 'tooltip').attr('style', 'position: absolute; opacity: 0;');
 
     d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
         console.log(data)
@@ -283,10 +311,7 @@
         
         let root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
             .sum(d => d.radius)
-						.sort((a,b) => {
-								console.log(a, b)
-								return a.data.geo_scope_val - b.data.geo_scope_val
-							});
+						.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 						// .sort((a,b) => a.geo_scope_val - b.geo_scope_val)
     
         console.log(root)
@@ -303,15 +328,19 @@
                 if (d.geo_scope === 'Unknown') {
                     // d.radius = radius// * 1
 										d.geo_scope_val = 0
+										d.geo_scope_label = 'Unknown'
                 } else if (d.geo_scope === 'Level 1') {
                     // d.radius = radius// * 1
 										d.geo_scope_val = 1
+										d.geo_scope_label = 'Local'
                 } else if (d.geo_scope === 'Level 2') {
                     // d.radius = radius// * 3
 										d.geo_scope_val = 2
+										d.geo_scope_label = 'Regional'
                 } else if (d.geo_scope === 'Level 3') {
                     // d.radius = radius// * 4
 										d.geo_scope_val = 3
+										d.geo_scope_label = 'National'
                 }
 								if (d.official_just === 'Fake News / Hate Speech / Incendiary Content or Promoting Violence') {
 									d.official_just = 'Hate Speech / Information Control'
@@ -369,6 +398,9 @@
             g
 							.attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+						lg
+							.attr("transform", `translate(${margin.left}, ${margin.top})`);
+
             pack
 							// .radius(myRoot, d => )
 							.size([width, height]);
@@ -386,126 +418,135 @@
             // console.log(leaves)
             // console.log(node.ancestors()[0].children)
 
-            const ancestorCircles = g.selectAll(".ancestor-circle")
-							// .data(ancestors[0].children, d => d.data.name);
-							.data(node.ancestors()[0].children, function(d) {
-									// console.log('ancestors', buttonId, d.data.name)
-									return d.data.name
-							})
-						// console.log('ancestorCircles', ancestorCircles)
-
-            if (resizing){
-                ancestorCircles.exit()
-                    .attr("r", 1e-6)
-                    .remove();
-
-                ancestorCircles
-                    .attr("cx", d => d.x)
-                    .attr("cy", d => d.y)
-                    .attr("r", d => d.r);
-            }
-            else {
-                ancestorCircles.exit()
-                    .transition().duration(duration / 2)
-                    .attr("r", 1e-6)
-                    .remove();
-
-                ancestorCircles
-                    .transition().duration(duration)
-                    .attr("cx", d => d.x)
-                    .attr("cy", d => d.y)
-                    .attr("r", d => d.r);          
-            }
-
-            ancestorCircles.enter().append("circle")
-                .style("fill", "white")
-                .style("stroke","white")
-                .attr("class", "ancestor-circle")
-								.attr("stroke-opacity", 0.4 )
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y)
-                .attr("r", 1e-6)
-            .transition().duration(duration / 2)
-                .attr("r", d => d.r);
+						const t = d3.transition()
+        			.duration(1000)
 						
-						// console.log(ancestorCircles)
-
-            const leafCircles = g.selectAll(".leaf-circle")
-                // .data(leaves, d => d.data.name);
-                .data(node.leaves(), function(d) {
-                    // console.log('leaves',d.data.access_now_ID)
-                    return d.data.access_now_ID
-                })
-
-            if (resizing){
-                leafCircles.exit()
-                    .attr("r", 1e-6)
-                    .remove();
-
-                leafCircles
+						const t500 = d3.transition().duration(500)
+						const t2000 = d3.transition().duration(2000)
+						// console.log('t', t)
+						
+						const ancestorCircles = g.selectAll(".ancestor-circle")
+							.data(node.ancestors()[0].children, d => d.data.name)
+							.join(
+								enter => enter.append("circle")
+									.style("fill", "white")
+									.style("stroke","white")
+									.attr("class", "ancestor-circle")
+									.attr("stroke-opacity", 0.4 )
+									.attr("cx", d => d.x)
+									.attr("cy", d => d.y)
+									.attr("r", 1e-6)
+								.call(enter => enter.transition(t)
+                	.attr("r", d => d.r)	
+								),
+								update => update
+									.attr("cx", d => d.x)
+									.attr("cy", d => d.y)
+									.attr("r", d => d.r)
+								.call(update => update.transition(t)
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y)
-                    .attr("r", d => d.r);
-            }
-            else {
-                leafCircles.exit()
-                    .transition().duration(duration / 2)
-                    .attr("r", 1e-6)
-                    .remove();
+                    .attr("r", d => d.r)
+								),
+								exit => exit
+									.call(exit => exit.transition(t/2)
+										.attr("r", 1e-6)
+                    .remove()
+									)
+							)
+			
+						const leafCircles = g.selectAll(".leaf-circle")
+							.data(node.leaves(), d =>  d.data.access_now_ID)
+							.join(
+								enter => enter.append("circle")
+									.style("fill", d => {
+										if (d.data.geo_scope === 'Unknown') {
+											return "#ff254a"
+										} else if (d.data.geo_scope === 'Level 1') {
+											return "white"
+										} else if (d.data.geo_scope === 'Level 2') {
+											return "#ff7a91"
+										} else if (d.data.geo_scope === 'Level 3') {
+											return "#bf1b32"
+										}
+									})
+									.style("stroke", d => {
+										if (d.data.geo_scope === 'Unknown') {
+											return "white"
+										} else if (d.data.geo_scope === 'Level 1') {
+											return "white"
+										} else if (d.data.geo_scope === 'Level 2') {
+											return "#ff7a91"
+										} else if (d.data.geo_scope === 'Level 3') {
+											return "#bf1b32"
+										}
+									})
+									.attr("class", "leaf-circle")
+									.attr("cx", d => d.x)
+									.attr("cy", d => d.y)
+									.attr("r", 1e-6)
+								.call(enter => enter.transition(t)
+									.attr("r", d => d.r)
+								),
+								update => update
+									.call(update => update.transition(t)
+										.attr("cx", d => d.x)
+										.attr("cy", d => d.y)
+										// .attr("r", d => d.r)
+								),
+								exit => exit
+									.call(exit => exit.transition(t/2)
+										.attr("r", 1e-6)
+                    .remove()
+									)
+							)
 
-                leafCircles
-                    .transition().duration(duration)
-                    .attr("cx", d => d.x)
-                    .attr("cy", d => d.y)
-                    .attr("r", d => d.r);
-            }
+							const leafCirclesRollover = lg.selectAll(".leaf-circle-rollover")
+							.data(node.leaves(), d =>  d.data.access_now_ID)
+							.join(
+								enter => enter.append("circle")
+									.style("fill", "green")
+									.style("stroke", "green")
+									.attr("opacity", 0)
+									.attr("class", "leaf-circle-rollover")
+									.attr("cx", d => d.x)
+									.attr("cy", d => d.y)
+									.attr("r", 1e-6)
+								.call(enter => enter.transition(t)
+									.attr("r", d => d.r)
+								),
+								update => update
+									.call(update => update.transition(t)
+										.attr("cx", d => d.x)
+										.attr("cy", d => d.y)
+										// .attr("r", d => d.r)
+								),
+								exit => exit
+									.call(exit => exit.transition(t/2)
+										.attr("r", 1e-6)
+                    .remove()
+									)
+							)
 
-            leafCircles.enter().append("circle")
-                .style("fill", d => {
-                  if (d.data.geo_scope === 'Unknown') {
-                    return "#ff254a"
-                  } else if (d.data.geo_scope === 'Level 1') {
-                    return "white"
-                  } else if (d.data.geo_scope === 'Level 2') {
-                    return "#ff7a91"
-                  } else if (d.data.geo_scope === 'Level 3') {
-                    return "#bf1b32"
-                  }
-                })
-                .style("stroke", d => {
-                  if (d.data.geo_scope === 'Unknown') {
-                    return "white"
-                  } else if (d.data.geo_scope === 'Level 1') {
-                    return "white"
-                  } else if (d.data.geo_scope === 'Level 2') {
-                    return "#ff7a91"
-                  } else if (d.data.geo_scope === 'Level 3') {
-                    return "#bf1b32"
-                  }
-                })
-                .attr("class", "leaf-circle")
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y)
-                .attr("r", 1e-6)
-            .transition().duration(duration)
-                .attr("r", d => d.r);
-
-							// svg.append("text")
-							// 	.attr("transform", `translate(${width / 2},${height / 2}) scale(${radius / textRadius})`)
-							// .selectAll("tspan")
-							// .data(lines)
-							// .enter().append("tspan")
-							// 	.attr("x", 0)
-							// 	.attr("y", (d, i) => (i - lines.length / 2 + 0.8) * lineHeight)
-							// 	.text(d => d.text)
-							// svg.append("text")
-							// 	.attr("transform", `translate(${width / 2},${height / 2}) scale(${radius / textRadius})`)
-							// .selectAll("tspan")
-							// .data(lines)
-							// .enter().append("tspan")
-							// 	.attr("x", 0)
-							// 	.attr("y", (d, i) => (i - lines.length / 2 + 0.8) * lineHeight)
-							// 	.text(d => d.text);
+							d3.selectAll(".leaf-circle-rollover")
+								.on('mouseover', function(d) {
+									// console.log('mouseover', d)
+									div
+										.transition()
+										.duration(200)
+										.style('opacity', 1);
+									div
+										.html(makeTooltipInfo(d))
+										.style('left', d3.event.pageX + 'px')
+										.style('top', d3.event.pageY - 28 + 'px');
+									d3.select(this).style("cursor", "pointer");
+								})
+								.on('mouseout', function() {
+									div
+										.transition()
+										.duration(500)
+										.style('opacity', 0);
+							})
 
 						g.selectAll("text")
 							.data(node.ancestors()[0].children, d => d.data.name)
@@ -525,7 +566,7 @@
 										.attr("opacity", 0)
 										.text(d => d.data.name)
 										// .call(wrap, d => 30)
-									.call(enter => enter.transition(duration)
+									.call(enter => enter.transition(t)
 										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, 30),
 								update => update
 										.attr("fill", "black")
@@ -535,12 +576,12 @@
 										.attr("y", d => d.y + 1)
 										.attr("dy", -1)//set the dy here
 										.attr("opacity", 0)
-									.call(update => update.transition(duration * 2)
+									.call(update => update.transition(t)
 										// .attr("x", (d, i) => i * 16)),
 										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, 30),
 								exit => exit
 										.attr("fill", "brown")
-									.call(exit => exit.transition(duration/2)
+									.call(exit => exit.transition(t/2)
 										// .attr("y", 30)
 										.attr("opacity", 0)
 										.remove())
@@ -549,25 +590,46 @@
 							.call(wrap, d => d.r)
 						}
 
-        // Generate random hierarchical data
-        // function makeData() {
-        //     const dataObj = { }
-        //     dataObj["name"] = "root"
-        //     dataObj["children"] = categories.map(name => {
-        //         return {
-        //         name,
-        //         children: d3.range(randBetween(5, 10)).map((d, i) => {
-        //             return {
-        //             name: `${name}${i}`,
-        //             value: randBetween(10, 100)
-        //             }
-        //         })
-        //         }
-        //     })
-
-        //     // console.log(dataObj)
-        //     return dataObj
-        // }
+				// Make tooltip html
+				function makeTooltipInfo(d) {
+					
+					let html = '';
+					if (d.data.duration_affected_days) {
+						html += '<b>Affected Days</b> ' + d.data.duration_affected_days
+					}
+					if (d.data.shutdown_status) {
+						html += '<br><b>Shutdown Status</b> ' + d.data.shutdown_status
+					}
+					if (d.data.ordered_by) {
+						html += '<br><b>Ordered By</b> ' + d.data.ordered_by
+					}
+					if (d.data.actual_cause) {
+						html += '<br><b>Actual Cause</b> ' + d.data.actual_cause
+					}
+					if (d.data.official_just) {
+						html += '<br><b>Official Justification</b> ' + d.data.official_just
+					}
+					if (d.data.country) {
+						html += '<br><b>Country</b> ' + d.data.country
+					}
+					if (d.data.shutdown_type_new) {
+						html += '<br><b>Shutdown Type</b> ' + d.data.shutdown_type_new
+					}
+					if (d.data.affected_network) {
+						html += '<br><b>Affected Network</b> ' + d.data.affected_network
+					}
+					if (d.data['full or service-based']) {
+						html += '<br><b>Full or Service-based</b> ' + d.data['full or service-based']
+					}
+					if (d.data.geo_scope_label) {
+						html += '<br><b>Geographic Scope</b> ' + d.data.geo_scope_label
+					}
+					if (d.data.access_now_ID) {
+						html += '<br><b>ID</b> ' + d.data.access_now_ID
+					}
+					console.log(html.toString())
+					return `${html.toString()}`
+				}
 
         function updateNodeGroups(data, byVar) {
             const categoryArrayObj = data.reduce((obj, d, i) => {
@@ -615,14 +677,8 @@
 					//     .sum(d => d.value)
 					//     .sort((a, b) => a.value - b.value);
 					root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
-							.sum(d => {
-								console.log(d)
-								return d.radius
-							})
-							.sort((a,b) => {
-								console.log(a, b)
-								return a.data.geo_scope_val - b.data.geo_scope_val
-							});
+							.sum(d => d.radius)
+							.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 					draw(false, root, buttonId);
 				}
 
@@ -789,9 +845,6 @@
 				return radius;
 			}
 
-    
-
-    
     </script>
   </body>
 </html>
