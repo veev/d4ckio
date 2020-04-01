@@ -523,7 +523,7 @@
 									.call(update => update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
-										// .attr("r", d => d.r)
+										.attr("r", d => d.r)
 								),
 								exit => exit
 									.call(exit => exit.transition(t/2)
@@ -552,7 +552,7 @@
 									.call(update => update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
-										// .attr("r", d => d.r)
+										.attr("r", d => d.r)
 								),
 								exit => exit
 									.call(exit => exit.transition(t/2)
@@ -722,9 +722,6 @@
 					document.getElementById(`${buttonId}`).classList.add("selected")
 					d3.select('#leftArrow')
 						.on('click', function() {
-							d3.selectAll('.button').classed('selected', false)
-							// Remove active class from all buttons
-							// d3.selectAll('.button').classed('active', false)
 							selectedIndex--
 							if (selectedIndex < 0) {
 								selectedIndex = 0
@@ -732,17 +729,16 @@
 							buttonId = selectedButtonIds[selectedIndex]
 							const selector = `${buttonId}`
 							console.log(selector)
-							document.getElementById(selector).classList.add("selected")
-							// document.getElementById(selector).focus();
-							console.log(buttonId, selectedIndex)
-							updateButtons()
+							if (selector !== 'undefined') {
+								d3.selectAll('.button').classed('selected', false)
+								document.getElementById(selector).classList.add("selected")
+								console.log(buttonId, selectedIndex)
+								updateButtons()
+							}
 					})
 
 					d3.select('#rightArrow')
 						.on('click', function() {
-							d3.selectAll('.button').classed('selected', false)
-							// Remove active class from all buttons
-							// d3.selectAll('.button').classed('active', false).classed('focus', false)
 							selectedIndex++
 							if (selectedIndex > selectedButtonIds.length) {
 								selectedIndex = selectedButtonIds.length - 1
@@ -750,12 +746,12 @@
 							buttonId = selectedButtonIds[selectedIndex]
 							const selector = `${buttonId}`
 							console.log(selector)
-							document.getElementById(selector).classList.add("selected")
-							// d3.select(selector).classed('active', true)
-							// d3.select(selector).classed('focus', true)
-							// document.getElementById(selector).focus();
-							console.log(buttonId, selectedIndex)
-							updateButtons()
+							if (selector !== 'undefined') {
+								d3.selectAll('.button').classed('selected', false)
+								document.getElementById(selector).classList.add("selected")
+								console.log(buttonId, selectedIndex)
+								updateButtons()
+							}
 					})
 
 					d3.selectAll('.button')
@@ -778,8 +774,6 @@
 							for (let i = 0; i < selectedButtonIds.length; i++) {
 								if (buttonId === selectedButtonIds[i]) {
 									selectedIndex = i
-								} else {
-
 								}
 							}
 
