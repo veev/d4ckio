@@ -295,28 +295,17 @@
 			const selectedButtonIds = ["all", "sub_region", "actual_cause", "ordered_by", "official_just", "shutdown_type_new", "affected_network"]
 			let selectedIndex = 0
 			const lineHeight = 12
-      // const margin = {
-			// 	left: innerWidth * 0.1, 
-			// 	right: innerWidth * 0.1, 
-			// 	top: innerHeight * 0.1, 
-			// 	bottom: innerHeight * 0.1
-			// 	},
+
 			const margin = {
 				left: 0, 
 				right: 0, 
 				top: 0, 
 				bottom: 0
 				},
-          duration = 1000,
-          // categories = "abcdefg".split(""),
-        //   colors = {},
-          radius = 6;
+        duration = 1000,
+				radius = 6;
 					
-          let buttonId = 'all'
-
-    //   categories.forEach((d, i) => {
-    //     colors[d] = d3.schemeSet2[i];
-    //   });
+      let buttonId = 'all'
 
       const svg = d3.select("#svgCanvas").append("svg");
       const g = svg.append("g");
