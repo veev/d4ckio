@@ -312,7 +312,7 @@
 			const lg = svg.append("g")
 			
       const pack = d3.pack()
-          .padding(d => d.height * 30);
+          .padding(d => d.padding || 0);
 
 			// add tooltip
 			const div = d3.select('body').append('div').attr('class', 'tooltip').attr('style', 'position: absolute; opacity: 0;');
@@ -343,19 +343,19 @@
                 // create new leaner obj
                 // set radius based on geo_scope
                 if (d.geo_scope === 'Unknown') {
-                    // d.radius = radius// * 1
+                    // d.radius = radius * 1
 										d.geo_scope_val = 0
 										d.geo_scope_label = 'Unknown'
                 } else if (d.geo_scope === 'Level 1') {
-                    // d.radius = radius// * 1
+                    // d.radius = radius * 1
 										d.geo_scope_val = 1
 										d.geo_scope_label = 'Local'
                 } else if (d.geo_scope === 'Level 2') {
-                    // d.radius = radius// * 3
+                    // d.radius = radius * 3
 										d.geo_scope_val = 2
 										d.geo_scope_label = 'Regional'
                 } else if (d.geo_scope === 'Level 3') {
-                    // d.radius = radius// * 4
+                    // d.radius = radius * 4
 										d.geo_scope_val = 3
 										d.geo_scope_label = 'National'
                 }
@@ -420,7 +420,11 @@
 
             pack
 							// .radius(myRoot, d => )
-							.size([width, height]);
+							.size([width, height])
+							.padding(d => {
+								// console.log(d)
+								return d.data.padding;
+							})
 							// pack.radius(d => {
 							// 	console.log(d)
 							// 	return d.value
@@ -438,8 +442,8 @@
 						const t = d3.transition()
         			.duration(1000)
 						
-						const t500 = d3.transition().duration(500)
-						const t2000 = d3.transition().duration(2000)
+						// const t500 = d3.transition().duration(500)
+						// const t2000 = d3.transition().duration(2000)
 						// console.log('t', t)
 						
 						const ancestorCircles = g.selectAll(".ancestor-circle")
@@ -551,7 +555,7 @@
 
 							d3.selectAll(".leaf-circle-rollover")
 								.on('mousemove', function(d) {
-									console.log('mousemove', d3.select(this))
+									// console.log('mousemove', d3.select(this))
 									div
 										.transition()
 										.duration(200)
@@ -673,14 +677,54 @@
             for (const property in categoryArrayObj) {
                 const newObj = {}
                 newObj['name'] = property
+								newObj['padding'] = 0
                 newObj['children'] = categoryArrayObj[property]
                 hierarchy_group_nodes.push(newObj)
             }
             // console.log(hierarchy_group_nodes)
 
+						//create a sub hierarchy for sub regions
+						region_hierarchy_group_nodes = hierarchy_group_nodes.map( el => {
+							// get the children for each category
+							// and create subcategories for subregions							
+							let newRegionObj = {}
+							// for (let i = 0; i < subRegionKeys.length; i++) {
+								newRegionObj = el.children.reduce((obj, d) => {
+									if (obj[d['geo_scope_label']]){
+											obj[d['geo_scope_label']].push(d);
+									} else {
+											obj[d['geo_scope_label']] = [d];
+									}
+									return obj
+								}, {})
+							// }
+							// console.log(el.name, newRegionObj)
+
+							// transform key/value pairs
+							const transfRegionArray = []
+							for (const property in newRegionObj) {
+                const newObj = {}
+                newObj['name'] = property
+								newObj['padding'] = 15
+                newObj['children'] = newRegionObj[property]
+                transfRegionArray.push(newObj)
+            	}
+
+							// console.log(transfRegionArray)
+
+							nObj = {}
+							nObj.name = el.name
+							nObj.padding = 0
+							nObj.children = transfRegionArray
+							return nObj
+						})
+
+						// console.log(region_hierarchy_group_nodes)
+
             const updatedDataObj = {
                 'name': 'root',
-                'children': hierarchy_group_nodes
+								'padding': 10,
+                'children': region_hierarchy_group_nodes
             }
             // console.log(updatedDataObj)
             return updatedDataObj
@@ -794,7 +838,7 @@
 							x = text.attr("x")
 							dy = parseFloat(text.attr("dy")),
 							tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
-					console.log(x, y, dy)
+					// console.log(x, y, dy)
 					while (word = words.pop()) {
 						line.push(word);
 						tspan.text(line.join(" "));
