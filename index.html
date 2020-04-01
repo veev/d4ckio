@@ -349,7 +349,6 @@
 
         onresize = _ => draw(true, root, buttonId);
 
-        ////// UTILS ////////
         function getFormattedData(data, radius) {
             const mapped = data.map( d => {
                 // create new leaner obj
@@ -788,15 +787,8 @@
     
     })
 
-      
-    //   d3.interval(_ => {
-    //     root = d3.hierarchy(makeData())
-    //       .sum(d => d.value)
-    //       .sort((a, b) => a.value - b.value);
 
-    //     draw();
-    //   }, duration * 2);
-      
+      ////// UTILS ////////
       function randBetween(min, max){
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
