@@ -432,7 +432,7 @@
 						.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 						// .sort((a,b) => a.geo_scope_val - b.geo_scope_val)
     
-        console.log(root)
+        // console.log(root)
 
         draw(false, root, buttonId);
 
@@ -536,13 +536,30 @@
 						let leaves = node.leaves();
 						let	ancestors = node.ancestors();
 
-						// console.log('root', myRoot)
+						console.log('root', myRoot)
 
             console.log(leaves)
             console.log(node.ancestors()[0].children)
 
 						const t = d3.transition()
         			.duration(1000)
+
+						// try sorting leaves based on x and y values
+						const newLeaves = [...leaves].sort((a,b) => {
+							//sort by x, secondary by y
+  						return a.x == b.x ? a.y - b.y : a.x - b.x;
+						})
+
+						console.log(leaves)
+						console.log(newLeaves)
+
+						let leafCounter = 0
+						// const mappedNewLeaves = leaves.map( l => {
+						// 	l.x = newLeaves[leafCounter].x
+						// 	leafCounter++
+						// 	return l
+						// })
+						// console.log(mappedNewLeaves)
 						
 						// const t500 = d3.transition().duration(500)
 						// const t2000 = d3.transition().duration(2000)
@@ -580,7 +597,14 @@
 							)
 			
 						const leafCircles = g.selectAll(".leaf-circle")
-							.data(node.leaves(), d =>  d.data.access_now_ID)
+							.data(
+								node.leaves(), d => d.data.access_now_ID)
+							// node.leaves().map( l => {
+							// 	l.x = newLeaves[leafCounter].x
+							// 	l.y = newLeaves[leafCounter].y
+							// 	leafCounter++
+							// 	return l
+							// }))
 							.join(
 								enter => enter.append("circle")
 									.style("fill", d => {
@@ -605,6 +629,7 @@
 											return "#bf1b32"
 										}
 									})
+									// .style("fill", (d,i) => `rgb(255, 255, ${i})`)
 									.attr("class", "leaf-circle")
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
@@ -816,7 +841,7 @@
 
 							nObj = {}
 							nObj.name = el.name
-							nObj.padding = 0
+							nObj.padding = -8
 							nObj.children = transfRegionArray
 							return nObj
 						})
@@ -825,10 +850,11 @@
 
             const updatedDataObj = {
                 'name': 'root',
-								'padding': 10,
+								'padding': 20,
                 'children': region_hierarchy_group_nodes
+								// 'children': hierarchy_group_nodes
             }
-            // console.log(updatedDataObj)
+            console.log(updatedDataObj)
             return updatedDataObj
         }
 
