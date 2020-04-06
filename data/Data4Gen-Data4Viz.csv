@@ -115,7 +115,6 @@ start_date,shutdown_status,end_date,country,sub_region,geo_scope,shutdown_type_n
 12-Feb-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,Mobile,Full network,State government,Other,Unknown,1,30
 14-Jun-2019,Unknown,,India,Southern Asia,Level 1,Shutdown,"Broadband, Mobile","Service-based, Full network",State government,Other,Unknown,1,133
 16-May-2019,Unknown,,India,Southern Asia,Unknown,Unknown,Unknown,Unknown,State government,Other,Unknown,1,101
-05-Feb-2019,Unknown,,India,Southern Asia,Level 1,Unknown,Unknown,Unknown,State government,Other,Unknown,1,26
 22-Jun-2019,Ended,22-Aug-2019,Ethiopia,Eastern Africa,Level 3,Shutdown,"Broadband, Mobile",Service-based,Executive government,Political Instability,Fake News / Hate Speech / Incendiary Content or Promoting Violence,62,144
 05-Apr-2019,Ended,06-Apr-2019,India,Southern Asia,Level 2,"Shutdown, Throttle",Mobile,Full network,State government,Political Instability,Fake News / Hate Speech / Incendiary Content or Promoting Violence,2,65
 03-Aug-2019,Ended,15-Jan-2020,India,Southern Asia,Level 2,Shutdown,"Broadband, Mobile",Full network,State government,Political Instability,Fake News / Hate Speech / Incendiary Content or Promoting Violence,166,169
