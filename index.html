@@ -9,11 +9,7 @@
         margin: 0;
         background-color:#FF254A;
       }
-			.container {
-				/* height: 100%; */
-				/* width: 90%; */
-				/* margin: 0 auto; */
-
+			.container { 
 				border: 0;
 				height: 100%;
 				left: 0;
@@ -40,7 +36,6 @@
 				cursor: pointer;
 			}
 			i:hover {
-				/* background-color:black; */
 				color: white;
 			}
 			.navArrow[disabled]{
@@ -72,13 +67,9 @@
 			}
 			#callout {
 				position: relative;
-				/* min-height: 18vh; */
-				/* height: 20%;
-				margin: 20px auto 0px; */
-				/* width: 70%; */
 				display: block;
 				font-family: 'Source Serif Pro', serif;
-				font-size: 1.5rem;
+				font-size: 1.6rem;
 				text-align: center;
 			}
       #callout > .highlight {
@@ -86,7 +77,6 @@
       }
 			.menu {
 				position: relative;
-				/* height: 15vh; */
 				text-align:center;
   			align-content:center;
 			}
@@ -109,31 +99,21 @@
 				margin-right: 10px;
 			}
 			.legendCircle {
-				/* background-color:white; */
 				border-radius: 50%;
-				/* margin: auto 0; */
 				margin: 2px 0px 0px 0px;
 				width: 12px;
 				height: 12px;
 			}
 			#nationalCircle {
-				/* width: 15px;
-				height: 15px; */
 				background-color: #bf1b32;
 			}
 			#regionalCircle {
-				/* width: 12px;
-				height: 12px; */
 				background-color: #ff7a91;
 			}
 			#localCircle {
-				/* width: 9px;
-				height: 9px; */
 				background-color: white;
 			}
 			#unknownCircle {
-				/* width: 9px;
-				height: 9px; */
 				border:1px solid white;
 				width: 12px;
 				height: 12px;
@@ -208,27 +188,7 @@
 				background: rgba(255,255,255,1);
 				box-shadow: 0 0 10px gray;
 				pointer-events: none;
-				/* border: 1px solid #c2c2c2; */
 			}
-			/* div.tooltip:after {
-				right: 100%;
-				top: 50%;
-				border: solid transparent;
-				content: " ";
-				height: 0;
-				width: 0;
-				position: absolute;
-				pointer-events: none;
-				border-color: rgba(255, 255, 255, 0);
-				border-right-color: #ffffff;
-				border-width: 10px;
-				margin-top: -10px;
-			}
-			.arrow_box {
-				position: relative;
-				background: #ffffff;
-				border: 1px solid #c2c2c2;
-			} */
 			div.tooltip:after, div.tooltip:before {
 				right: 100%;
 				top: 50%;
@@ -252,16 +212,12 @@
 				border-width: 11px;
 				margin-top: -11px;
 			}
-
-			@media screen and (max-width: 600px) {
+			@media screen and (max-width: 375px) {
 				.headerNav {
-					height: 30%;
+					height: 25%;
 					margin: 20px auto 0px;
 					width: 90%;
 				}
-				/* i {
-						padding: 25px;
-				} */
 				#callout {
 					font-size: 1.2rem;
 				}
@@ -270,31 +226,39 @@
 					margin-bottom: 15px;
 				}
 				.group-label{
-					font-size: 12px;
+					font-size: 9px;
 				}
-				/* .menu {
-					height: 14%;
-				} */
-				/* .legend {
-					height: 20px;
-					padding-bottom: 46px;
-					font-size: 31px;
-				}
-				.button {
-					border-radius: 35px;
-					font-size: 35px;
-					padding: 12px 24px;
-					margin: 3px 1px 5px 1px;
+				.legend {
+					font-size: 10px;
 				}
 				.legendCircle {
-					margin: 8px 0px 0px 0px;
-					width: 24px;
-					height: 24px;
+					border-radius: 50%;
+					margin: 2px 0px 0px 0px;
+					width: 9px;
+					height: 9px;
 				}
 				#unknownCircle {
-					width: 24px;
-					height: 24px;
-				} */
+					width: 9px;
+					height: 9px;
+				}
+			}
+
+			@media screen and (min-width: 375px) and (max-width: 600px) {
+				.headerNav {
+					height: 25%;
+					margin: 20px auto 0px;
+					width: 90%;
+				}
+				#callout {
+					font-size: 1.3rem;
+				}
+				#svgCanvas {
+					height: 48%;
+					margin-bottom: 15px;
+				}
+				.group-label{
+					font-size: 12px;
+				}
 			}	
 			@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 				.headerNav {
@@ -309,7 +273,7 @@
 					font-size: 2.2rem;
 				}
 				#svgCanvas {
-					height: 60%;
+					height: 55%;
 					margin-bottom: 15px;
 				}
 				.group-label{
@@ -332,13 +296,13 @@
     			margin: 6px 1px 5px 1px;
 				}
 				.legendCircle {
-					margin: 8px 0px 0px 0px;
-					width: 24px;
-					height: 24px;
+					margin: 6px 0px 0px 0px;
+    			width: 20px;
+    			height: 20px;
 				}
 				#unknownCircle {
-					width: 24px;
-					height: 24px;
+					width: 20px;
+					height: 20px;
 				}
 			}	
     </style>
@@ -388,7 +352,7 @@
 				"actual_cause": '<span class="highlight">Protests</span> are the top known cause of internet and network shutdowns.',
 				"ordered_by": 'From central governments to local administrations, many have the power to order an internet shutdown.',
 				"official_just": 'Public safety, national security, or stopping fake news are commonly used to justify shutdowns designed to prevent protests.',
-				"shutdown_type_new": 'Speed throttling is more subtle than a full network shutdown and is more likely to go undetected. In 2019, the #KeepItOn Shutdown Tracker Optimisation Project (STOP) recorded <span class="highlight">205</span> cases of shutdowns and <span class="highlight">15</span> cases of throttling.',
+				"shutdown_type_new": 'Speed throttling is more subtle than a full network shutdown and is more likely to go undetected.',
 				"affected_network": '<span class="highlight">62%</span> of the shutdowns recorded by STOP in 2019 affected both broadband and mobile networks.'
 			}
 
