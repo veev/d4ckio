@@ -928,12 +928,9 @@
 								d3.selectAll('.button').classed('selected', false)
 								// Find the button just clicked
 								var button = d3.select(this)
-								button.classed('selected', true)
 								// Set it as the active button
-								// button.classed('active', true)
-								// button.classed('focus', true)
-								// button.classed('selected', true)
-
+								button.classed('selected', true)
+								
 								// Get the id of the button
 								buttonId = button.attr('id')
 
@@ -943,7 +940,21 @@
 										selectedIndex = i
 									}
 								}
-								console.log(buttonId, selectedIndex)
+								// console.log(buttonId, selectedIndex)
+
+								if (selectedIndex < selectedButtonIds.length) {
+									document.getElementById('rightArrow').removeAttribute('disabled')
+								}
+								if (selectedIndex === selectedButtonIds.length - 1) {
+									document.getElementById('rightArrow').setAttribute('disabled', '')
+								}
+								if (selectedIndex === 0) {
+									document.getElementById('leftArrow').setAttribute('disabled', '')
+								}
+								if (selectedIndex > 0) {
+									document.getElementById('leftArrow').removeAttribute('disabled')
+								}
+
 								updateButtons()
 								}
 								// set timeout
