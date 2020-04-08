@@ -40,7 +40,7 @@
 			}
 			.navArrow[disabled]{
 				pointer-events: none;
-				opacity: 0.7;
+				opacity: 0.3;
 			}
 			#leftArrow {
 				padding-right: 5px;
@@ -55,6 +55,11 @@
 				display: inline-block;
 				padding: 15px;
 			}
+
+			/* i.arrowDisabled {
+				border: solid darkgray;
+				pointer-events: none;
+			} */
 
 			.right {
 				transform: rotate(-45deg);
@@ -155,6 +160,7 @@
 				background-color:black;
 				color: white;
 				outline: none;
+				pointer-events: none;
 			}
 			#svgCanvas {
 				position: relative;
@@ -212,6 +218,7 @@
 				border-width: 11px;
 				margin-top: -11px;
 			}
+		
 			@media screen and (max-width: 375px) {
 				.headerNav {
 					height: 25%;
@@ -310,7 +317,7 @@
   <body>
 			<div class="container">
 				<div class="headerNav">
-					<div id="leftArrow" class="navArrow"><i class="left"></i></div>
+					<div id="leftArrow" class="navArrow" disabled><i class="left"></i></div>
 					<div id="callout" ></div>
 					<div id="rightArrow" class="navArrow"><i class="right"></i></div>
 			</div>
@@ -382,10 +389,10 @@
 			const div = d3.select('body').append('div').attr('class', 'tooltip').attr('style', 'position: absolute; opacity: 0;');
 
     d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
-        console.log(data)
+        // console.log(data)
 
         const formatted = getFormattedData(data, radius)
-        console.log(formatted)
+        // console.log(formatted)
 
         // let randomRoot = d3.hierarchy(makeData())
         //             .sum(d => d.value)
@@ -500,10 +507,10 @@
 						let leaves = node.leaves();
 						let	ancestors = node.ancestors();
 
-						console.log('root', myRoot)
+						// console.log('root', myRoot)
 
-            console.log(leaves)
-            console.log(node.ancestors()[0].children)
+            // console.log(leaves)
+            // console.log(node.ancestors()[0].children)
 
 						const t = d3.transition()
         			.duration(1000)
@@ -514,8 +521,8 @@
   						return a.x == b.x ? a.y - b.y : a.x - b.x;
 						})
 
-						console.log(leaves)
-						console.log(newLeaves)
+						// console.log(leaves)
+						// console.log(newLeaves)
 
 						let leafCounter = 0
 						// const mappedNewLeaves = leaves.map( l => {
@@ -818,7 +825,7 @@
                 'children': region_hierarchy_group_nodes
 								// 'children': hierarchy_group_nodes
             }
-            console.log(updatedDataObj)
+            // console.log(updatedDataObj)
             return updatedDataObj
         }
 
@@ -842,69 +849,109 @@
 
         ////// UI ELEMENTS ////////
         function setupButtons() {
+					let leftArrowClicked = false
+					let rightArrowClicked = false
+					let bottomButtonClicked = false
 					// set the "all group" to be selected by default
 					document.getElementById(`${buttonId}`).classList.add("selected")
-					d3.select('#leftArrow')
-						.on('click', function() {
-							selectedIndex--
-							if (selectedIndex < 0) {
-								selectedIndex = 0
-							}
-							buttonId = selectedButtonIds[selectedIndex]
-							const selector = `${buttonId}`
-							console.log(selector)
-							if (selector !== 'undefined') {
-								d3.selectAll('.button').classed('selected', false)
-								document.getElementById(selector).classList.add("selected")
-								console.log(buttonId, selectedIndex)
-								updateButtons()
-							}
-					})
 
-					d3.select('#rightArrow')
-						.on('click', function() {
-							selectedIndex++
-							if (selectedIndex > selectedButtonIds.length) {
-								selectedIndex = selectedButtonIds.length - 1
-							}
-							buttonId = selectedButtonIds[selectedIndex]
-							const selector = `${buttonId}`
-							console.log(selector)
-							if (selector !== 'undefined') {
-								d3.selectAll('.button').classed('selected', false)
-								document.getElementById(selector).classList.add("selected")
-								console.log(buttonId, selectedIndex)
-								updateButtons()
-							}
-					})
-
-					d3.selectAll('.button')
-						.on('click', function() {
-							// Remove active class from all buttons
-							// d3.selectAll('.button').classed('active', false)
-							d3.selectAll('.button').classed('selected', false)
-							// Find the button just clicked
-							var button = d3.select(this)
-							button.classed('selected', true)
-							// Set it as the active button
-							// button.classed('active', true)
-							// button.classed('focus', true)
-							// button.classed('selected', true)
-
-							// Get the id of the button
-							buttonId = button.attr('id')
-
-							//Get selected Index
-							for (let i = 0; i < selectedButtonIds.length; i++) {
-								if (buttonId === selectedButtonIds[i]) {
-									selectedIndex = i
+					document.getElementById('leftArrow')
+						.addEventListener('click', function(e) {
+							// console.log(this)
+							e.preventDefault();
+							if (!leftArrowClicked) {
+								leftArrowClicked = true
+								selectedIndex--
+								if (selectedIndex <= 0) {
+									selectedIndex = 0
+									this.setAttribute('disabled', '')
 								}
+								buttonId = selectedButtonIds[selectedIndex]
+								const selector = `${buttonId}`
+								console.log(selector)
+								if (selector !== 'undefined') {
+									d3.selectAll('.button').classed('selected', false)
+									document.getElementById(selector).classList.add("selected")
+									// console.log(buttonId, selectedIndex)
+									updateButtons()
+									if (selectedIndex > 0) {
+										document.getElementById('rightArrow').removeAttribute('disabled')
+									}
+								}
+								// set timeout
+								setTimeout(function() {
+									leftArrowClicked = false
+								}, 1000)
 							}
+					})
 
-							console.log(buttonId, selectedIndex)
-							updateButtons()
+					document.getElementById('rightArrow')
+						.addEventListener('click', function(e) {
+							// console.log(this)
+							e.preventDefault();
+							if (!rightArrowClicked) {
+								rightArrowClicked = true
+								selectedIndex++
+								if (selectedIndex >= selectedButtonIds.length) {
+									selectedIndex = selectedButtonIds.length - 1
+									this.setAttribute('disabled', '')
+								}
+								buttonId = selectedButtonIds[selectedIndex]
+								const selector = `${buttonId}`
+								// console.log(selector)
+								if (selector !== 'undefined') {
+									d3.selectAll('.button').classed('selected', false)
+									document.getElementById(selector).classList.add("selected")
+									// console.log(buttonId, selectedIndex)
+									updateButtons()
+									if (selectedIndex < selectedButtonIds.length) {
+										document.getElementById('leftArrow').removeAttribute('disabled')
+									}
+									if (selectedIndex === selectedButtonIds.length - 1) {
+										this.setAttribute('disabled', '')
+									}
+								}
+								// set timeout
+								setTimeout(function() {
+									rightArrowClicked = false
+								}, 1000)
+							}
+					})
+
+					document.querySelectorAll('.button').forEach(item => {
+						item.addEventListener('click', function(e) {
+							e.preventDefault();
+							if (!bottomButtonClicked) {
+								bottomButtonClicked = true
+								// Remove active class from all buttons
+								// d3.selectAll('.button').classed('active', false)
+								d3.selectAll('.button').classed('selected', false)
+								// Find the button just clicked
+								var button = d3.select(this)
+								button.classed('selected', true)
+								// Set it as the active button
+								// button.classed('active', true)
+								// button.classed('focus', true)
+								// button.classed('selected', true)
+
+								// Get the id of the button
+								buttonId = button.attr('id')
+
+								//Get selected Index
+								for (let i = 0; i < selectedButtonIds.length; i++) {
+									if (buttonId === selectedButtonIds[i]) {
+										selectedIndex = i
+									}
+								}
+								console.log(buttonId, selectedIndex)
+								updateButtons()
+								}
+								// set timeout
+								setTimeout(function() {
+									bottomButtonClicked = false
+								}, 1000)
 						})
-						
+					})	
         }
         
         setupButtons()
