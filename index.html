@@ -367,14 +367,21 @@
 			let selectedIndex = 0
 			const lineHeight = 12
 
+			let radius;
+			// console.log(window.innerWidth, window.innerHeight)
+			if (window.innerWidth < 450) {
+				radius = 2
+			} else {
+				radius = 4
+			}
+
 			const margin = {
 				left: 0, 
 				right: 0, 
 				top: 0, 
 				bottom: 0
 				},
-        duration = 1000,
-				radius = 6;
+        duration = 1000;
 					
       let buttonId = 'all'
 
@@ -394,9 +401,11 @@
         const formatted = getFormattedData(data, radius)
         // console.log(formatted)
 
-        // let randomRoot = d3.hierarchy(makeData())
-        //             .sum(d => d.value)
-        //             .sort((a, b) => a.value - b.value);
+        // let radiusRoot = d3.hierarchy(updateNodeGroups(formatted, 'actual_cause'))
+        //             .sum(d => d.radius)
+        //             .sort((a, b) => a.data.geo_scope_val - b.data.geo_scope_val)
+				
+				// console.log('radiusRoot', radiusRoot)
         
         let root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
             .sum(d => d.radius)
@@ -604,7 +613,7 @@
 									.attr("class", "leaf-circle")
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
-									.attr("r", d => d.r)
+									.attr("r", d => radius)
 									.attr("opacity", 0)
 								.call(enter => enter.transition(t)
 									.attr("opacity", 1)
@@ -613,7 +622,7 @@
 									.call(update => update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
-										.attr("r", d => d.r)
+										.attr("r", d => radius)
 								),
 								exit => exit
 									.call(exit => exit.transition(t/2)
@@ -636,13 +645,13 @@
 									.attr("cy", d => d.y)
 									.attr("r", 1e-6)
 								.call(enter => enter.transition(t)
-									.attr("r", d => d.r)
+									.attr("r", d => radius)
 								),
 								update => update
 									.call(update => update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
-										.attr("r", d => d.r)
+										.attr("r", d => radius)
 								),
 								exit => exit
 									.call(exit => exit.transition(t/2)
