@@ -440,9 +440,9 @@
 										d.geo_scope_label = 'National'
                 }
 								if (d.official_just === 'Fake News / Hate Speech / Incendiary Content or Promoting Violence') {
-									d.official_just = 'Hate Speech / Information Control'
+									d.official_just = 'Hate Speech + Information Control'
 								} else if (d.official_just === 'Public Safety / Quell Unrest / Restore Public Order') {
-									d.official_just = 'Public Safety and Order'
+									d.official_just = 'Public Safety + Order'
 								} else if (d.official_just === 'National Security / Counter-Terrorism') {
 									d.official_just = 'National Security'
 								} else if (d.official_just === 'Sabotage / Third-party Action') {
@@ -456,6 +456,12 @@
 									d.actual_cause = 'Religious Holiday'
 								} else if (d.actual_cause === 'Visits by Government Officials') {
 									d.actual_cause = 'Visits by Officials'
+								}
+								if (d.shutdown_type_new === 'Shutdown, Throttle') {
+									d.shutdown_type_new = 'Shutdown + Throttle'
+								}
+								if (d.affected_network === 'Broadband, Mobile') {
+									d.affected_network = 'Broadband + Mobile'
 								}
                 d.access_now_ID = +d.access_now_ID
                 d.duration_affected_days = +d.duration_affected_days
