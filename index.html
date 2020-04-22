@@ -181,7 +181,11 @@
       }
 			.group-label {
 				font-family:'Source Sans Pro', sans-serif;
-				font-size:14px;
+				font-size:13px;
+				font-weight: 700;
+			}
+			div.tooltip .title {
+				font: 14px 'Source Sans Pro', sans-serif;
 			}
 			div.tooltip {
 				color: black;
@@ -286,6 +290,11 @@
 				.group-label{
 					font-size: 18px;
 				}
+				.groupArc path {
+					fill: black;
+					fill-opacity: 0.1;
+					stroke: none;
+			}
 				.legend {
 					height: 20px;
 					padding-bottom: 46px;
@@ -382,8 +391,9 @@
 				bottom: 0
 				},
         duration = 1000;
+			const charSize = 10;
 					
-      let buttonId = 'all'
+      let buttonId = 'actual_cause'
 
       const svg = d3.select("#svgCanvas").append("svg");
       const g = svg.append("g");
@@ -688,6 +698,41 @@
 										.style('opacity', 0);
 							})
 
+						// try adding curved arcs for group labels
+						// const startAngle = Math.PI * 0.1
+						// const labelArc = d3.arc()
+						// 			.innerRadius( d => d.r - 5)
+						// 			.outerRadius( d => d.r + 10)
+						// 			.startAngle(startAngle)
+						// 			.endAngle( d => {
+						// 				const total = d.data.name.length
+						// 				const step = charSize / d.r
+						// 				return startAngle + (total * step)
+						// 			})
+						// const groupLabels = g.selectAll(".groupArc")
+						// 											.data(node.ancestors()[0].children, d => d.data.name).enter()
+						// 											.append("g")
+						// 											.attr("class", "groupArc")
+						// 											.attr("transform", d => `translate(${d.x},${d.y})`)
+						
+						// groupLabels
+						// 	.append("path")
+						// 			.attr("class", "groupArc-arc")
+						// 			.attr("id", (d, i) => `arc${i}`)
+						// 			.attr("d", labelArc)
+
+						// groupLabels
+						// 	.append("text")
+						// 		.attr("class", "groupArc-label")
+						// 		.attr("transform", d => `translate(0,0)`)
+						// 		.attr("x", 0)
+						// 		.attr("y", 0)
+						// 		.attr("dy", 7)
+						// 	.append("textPath")
+						// 		.attr("xlink:href", (d,i) => `#arc${i}`)
+						// 		.text(d => d.data.name)
+
+
 						g.selectAll("text")
 							.data(node.ancestors()[0].children, d => d.data.name)
 							.join(
@@ -733,39 +778,36 @@
 				// Make tooltip html
 				function makeTooltipInfo(d) {
 					let html = '';
-					if (d.data.duration_affected_days) {
-						html += '<b>Affected Days</b> ' + d.data.duration_affected_days
-					}
-					if (d.data.shutdown_status) {
-						html += '<br><b>Shutdown Status</b> ' + d.data.shutdown_status
-					}
-					if (d.data.ordered_by) {
-						html += '<br><b>Ordered By</b> ' + d.data.ordered_by
-					}
-					if (d.data.actual_cause) {
-						html += '<br><b>Actual Cause</b> ' + d.data.actual_cause
-					}
-					if (d.data.official_just) {
-						html += '<br><b>Official Justification</b> ' + d.data.official_just
-					}
 					if (d.data.country) {
-						html += '<br><b>Country</b> ' + d.data.country
+						html += '<div class="title"><b>' + d.data.country + '</b></div>'
 					}
-					if (d.data.shutdown_type_new) {
-						html += '<br><b>Shutdown Type</b> ' + d.data.shutdown_type_new
-					}
-					if (d.data.affected_network) {
-						html += '<br><b>Affected Network</b> ' + d.data.affected_network
-					}
-					if (d.data['full or service-based']) {
-						html += '<br><b>Full or Service-based</b> ' + d.data['full or service-based']
+					if (d.data.duration_affected_days) {
+						html += '<b>Affected Days</b>: ' + d.data.duration_affected_days
 					}
 					if (d.data.geo_scope_label) {
-						html += '<br><b>Geographic Scope</b> ' + d.data.geo_scope_label
+						html += '<br><b>Geographic Scope</b>: ' + d.data.geo_scope_label
 					}
-					if (d.data.access_now_ID) {
-						html += '<br><b>ID</b> ' + d.data.access_now_ID
+					if (d.data.shutdown_status) {
+						html += '<br><b>Shutdown Status</b>: ' + d.data.shutdown_status
 					}
+					if (d.data.ordered_by) {
+						html += '<br><b>Ordered By</b>: ' + d.data.ordered_by
+					}
+					if (d.data.official_just) {
+						html += '<br><b>Official Justification</b>: ' + d.data.official_just
+					}
+					if (d.data.actual_cause) {
+						html += '<br><b>Actual Cause</b>: ' + d.data.actual_cause
+					}
+					if (d.data.affected_network) {
+						html += '<br><b>Affected Network</b>: ' + d.data.affected_network
+					}
+					if (d.data['full or service-based']) {
+						html += '<br><b>Full or Service-based</b>: ' + d.data['full or service-based']
+					}
+					// if (d.data.access_now_ID) {
+					// 	html += '<br><b>ID</b> ' + d.data.access_now_ID
+					// }
 					// console.log(html.toString())
 					return `${html.toString()}`
 				}
