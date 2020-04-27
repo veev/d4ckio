@@ -391,7 +391,7 @@
 				radius = 4
 				labelWidth = 80
 			}
-			console.log(window.innerWidth, labelWidth)
+			// console.log(window.innerWidth, labelWidth)
 
 			const margin = {
 				left: 0, 
@@ -434,7 +434,7 @@
 
 			const width = getDivDimension("#svgCanvas", "width")
 			const height = getDivDimension("#svgCanvas", "height")
-			console.log(width, height)
+			// console.log(width, height)
 
 			const pack = d3.pack()
           .padding(d => d.padding || 0)
@@ -465,7 +465,7 @@
 						.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 						// .sort((a,b) => a.geo_scope_val - b.geo_scope_val)
     
-        console.log(root)
+        // console.log(root)
 
         draw(false, root, buttonId);
 
