@@ -3,7 +3,7 @@
   <head>
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
     <style>
       body {
         margin: 0;
@@ -181,8 +181,8 @@
       }
 			.group-label {
 				font-family:'Source Sans Pro', sans-serif;
-				font-size:13px;
-				font-weight: 700;
+				font-size:11px;
+				font-weight: 600;
 			}
 			div.tooltip .title {
 				font: 14px 'Source Sans Pro', sans-serif;
@@ -268,7 +268,7 @@
 					margin-bottom: 15px;
 				}
 				.group-label{
-					font-size: 12px;
+					font-size: 10px;
 				}
 			}	
 			@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
@@ -377,12 +377,18 @@
 			const lineHeight = 12
 
 			let radius;
+			let labelWidth;
 			// console.log(window.innerWidth, window.innerHeight)
 			if (window.innerWidth < 450) {
 				radius = 2
-			} else {
+				labelWidth = 40
+			} else if (window.innerWidth >= 450 && window.innerWidth <= 1024) {
 				radius = 4
+				labelWidth = 120
+			} else {
+				labelWidth = 80
 			}
+			// console.log(window.innerWidth, labelWidth)
 
 			const margin = {
 				left: 0, 
@@ -393,17 +399,49 @@
         duration = 1000;
 			const charSize = 10;
 					
-      let buttonId = 'actual_cause'
+      let buttonId = 'all'
 
       const svg = d3.select("#svgCanvas").append("svg");
       const g = svg.append("g");
 			const lg = svg.append("g")
+
+			const minRadius = 20
+			// const w = getDivDimension("#svgCanvas", "width")
+			// const h = getDivDimension("#svgCanvas", "height")
 			
-      const pack = d3.pack()
-          .padding(d => d.padding || 0);
+      
+			
+			
 
 			// add tooltip
 			const div = d3.select('body').append('div').attr('class', 'tooltip').attr('style', 'position: absolute; opacity: 0;');
+
+			// get the dom element width
+			function getDivDimension (div, dim) {
+							// console.log(div, dim)
+							const dimension = d3.select(div)
+								// get the width of div element
+								.style(dim)
+								// take off 'px'
+								.slice(0, -2)
+							// return as an integer
+							return Math.round(Number(dimension))
+						}
+
+			const width = getDivDimension("#svgCanvas", "width")
+			const height = getDivDimension("#svgCanvas", "height")
+			// console.log(width, height)
+
+			const pack = d3.pack()
+          .padding(d => d.padding || 0)
+					// .size([height * 0.5, height * 0.5])
+					// .radius( d => {
+					// 		if (d.r < minRadius) {
+					// 			return minRadius
+					// 		} else {
+					// 			return d.r
+					// 		}
+					// 	});
 
     d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
         // console.log(data)
@@ -418,7 +456,8 @@
 				// console.log('radiusRoot', radiusRoot)
         
         let root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
-            .sum(d => d.radius)
+            // .sum(d => d.label ? d.labelRadius : d.radius)
+						.sum(d => d.radius)
 						.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 						// .sort((a,b) => a.geo_scope_val - b.geo_scope_val)
     
@@ -465,13 +504,25 @@
 								if (d.actual_cause === 'Religious holiday/anniversary') {
 									d.actual_cause = 'Religious Holiday'
 								} else if (d.actual_cause === 'Visits by Government Officials') {
-									d.actual_cause = 'Visits by Officials'
+									d.actual_cause = 'Official Visits'
 								}
 								if (d.shutdown_type_new === 'Shutdown, Throttle') {
 									d.shutdown_type_new = 'Shutdown + Throttle'
 								}
 								if (d.affected_network === 'Broadband, Mobile') {
 									d.affected_network = 'Broadband + Mobile'
+								}
+								if (d.ordered_by === 'Local government') {
+									d.ordered_by = 'Local Government'
+								}
+								if (d.ordered_by === 'Executive government') {
+									d.ordered_by = 'Executive Government'
+								}
+								if (d.ordered_by === 'State government') {
+									d.ordered_by = 'State Government'
+								}
+								if (d.ordered_by === 'Law enforcement') {
+									d.ordered_by = 'Law Enforcement'
 								}
                 d.access_now_ID = +d.access_now_ID
                 d.duration_affected_days = +d.duration_affected_days
@@ -490,21 +541,6 @@
         }
 
         function draw(resizing, myRoot, myButtonId) {
-
-						// get the dom element width
-						function getDivDimension (div, dim) {
-							// console.log(div, dim)
-							const dimension = d3.select(div)
-								// get the width of div element
-								.style(dim)
-								// take off 'px'
-								.slice(0, -2)
-							// return as an integer
-							return Math.round(Number(dimension))
-						}
-
-						const width = getDivDimension("#svgCanvas", "width")
-						const height = getDivDimension("#svgCanvas", "height")
 
             svg
 							.attr("width", width + margin.left + margin.right)
@@ -571,7 +607,14 @@
 									.attr("stroke-opacity", 0.4 )
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
-									.attr("r", d => d.r)
+									.attr("r", d => {
+										// if (d.r < minRadius) {
+										// 	return minRadius
+										// } else {
+										// 	return d.r
+										// }
+										return d.r
+									})
 									.attr("opacity", 0)
 								.call(enter => enter.transition(t)
 								.attr("opacity", 1)	
@@ -629,6 +672,7 @@
 									.attr("class", "leaf-circle")
 									.attr("cx", d => d.x)
 									.attr("cy", d => d.y)
+									// .attr("r", d => d.data.label ? d.data.labelRadius : radius)
 									.attr("r", d => radius)
 									.attr("opacity", 0)
 								.call(enter => enter.transition(t)
@@ -638,6 +682,7 @@
 									.call(update => update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
+										// .attr("r", d => d.data.label ? d.data.labelRadius : radius)
 										.attr("r", d => radius)
 								),
 								exit => exit
@@ -661,12 +706,14 @@
 									.attr("cy", d => d.y)
 									.attr("r", 1e-6)
 								.call(enter => enter.transition(t)
+									// .attr("r", d => d.data.label ? d.data.labelRadius : radius)
 									.attr("r", d => radius)
 								),
 								update => update
 									.call(update => update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
+										// .attr("r", d => d.data.label ? d.data.labelRadius :  radius)
 										.attr("r", d => radius)
 								),
 								exit => exit
@@ -732,7 +779,6 @@
 						// 		.attr("xlink:href", (d,i) => `#arc${i}`)
 						// 		.text(d => d.data.name)
 
-
 						g.selectAll("text")
 							.data(node.ancestors()[0].children, d => d.data.name)
 							.join(
@@ -742,28 +788,28 @@
 										.attr("class", "group-label")
 										.attr("text-anchor", "middle")
 										.attr("x", d => d.x + 1)
-										.attr("y", d => d.y + 1)
+										.attr("y", d => d.y +1)
 										.attr("dy", -1)//set the dy here
 										// .attr("y", (d, i) => {
 										// 	return	d.y + (i - getLabelLines(getLabelWords(d.data.name), d.data.name).length / 2 + 0.8) * lineHeight
 										// })
-										// .attr("transform", d => `translate(${d.x + 1},${d.y + d.r + 1})`)
+										.attr("transform", d => `translate(${0},${-d.r + 10})`)
 										.attr("opacity", 0)
 										.text(d => d.data.name)
 										// .call(wrap, d => 30)
 									.call(enter => enter.transition(t)
-										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, 30),
+										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, labelWidth),
 								update => update
 										.attr("fill", "black")
 										// .attr("y", 0)
-										// .attr("transform", d => `translate(${d.x + 1},${d.y + d.r + 1})`)
+										.attr("transform", d => `translate(${0},${-d.r + 10})`)
 										.attr("x", d => d.x + 1)
-										.attr("y", d => d.y + 1)
+										.attr("y", d => d.y +1)
 										.attr("dy", -1)//set the dy here
 										.attr("opacity", 0)
 									.call(update => update.transition(t)
 										// .attr("x", (d, i) => i * 16)),
-										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, 30),
+										.attr("opacity", d => d.data.name === "undefined" ? 0 : 1)).call(wrap, labelWidth),
 								exit => exit
 										.attr("fill", "brown")
 									.call(exit => exit.transition(t/2)
@@ -772,7 +818,7 @@
 										.remove())
 						);
 						g.selectAll(".group-label text")
-							.call(wrap, d => d.r)
+							.call(wrap)
 						}
 
 				// Make tooltip html
@@ -816,11 +862,16 @@
             const categoryArrayObj = data.reduce((obj, d, i) => {
                 // here we want to group elements according to the values they
                 // have in common for a particular key (that we select by the button)
-                // console.log(d[byVar])
+								// d.label = false;
+								// const newObj = {...d}
+								// newObj.label = true;
+								// newObj.labelRadius = 20;
+								// newObj.geo_scope_label = 'Label';
                 if (obj[d[byVar]]){
                     obj[d[byVar]].push(d);
                 } else {
                     obj[d[byVar]] = [d];
+										// obj[d[byVar]].push(newObj)
                 }
                 return obj
                 // console.log(d[byVar])
@@ -860,7 +911,7 @@
 							for (const property in newRegionObj) {
                 const newObj = {}
                 newObj['name'] = property
-								newObj['padding'] = 15
+								newObj['padding'] = 150
                 newObj['children'] = newRegionObj[property]
                 transfRegionArray.push(newObj)
             	}
@@ -869,7 +920,7 @@
 
 							nObj = {}
 							nObj.name = el.name
-							nObj.padding = -8
+							nObj.padding = 100
 							nObj.children = transfRegionArray
 							return nObj
 						})
@@ -878,7 +929,7 @@
 
             const updatedDataObj = {
                 'name': 'root',
-								'padding': 20,
+								'padding': 150,
                 'children': region_hierarchy_group_nodes
 								// 'children': hierarchy_group_nodes
             }
@@ -899,7 +950,7 @@
 					//     .sum(d => d.value)
 					//     .sort((a, b) => a.value - b.value);
 					root = d3.hierarchy(updateNodeGroups(formatted, buttonId))
-							.sum(d => d.radius)
+							.sum(d => d.label ? d.labelRadius : d.radius)
 							.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 					draw(false, root, buttonId);
 				}
