@@ -110,10 +110,12 @@
 				height: 12px;
 			}
 			#nationalCircle {
-				background-color: #bf1b32;
+				/* background-color: #bf1b32; */
+				background-color: #a00d22;
 			}
 			#regionalCircle {
-				background-color: #ff7a91;
+				/* background-color: #ff7a91; */
+				background-color: #f391a3;
 			}
 			#localCircle {
 				background-color: white;
@@ -386,9 +388,10 @@
 				radius = 4
 				labelWidth = 120
 			} else {
+				radius = 4
 				labelWidth = 80
 			}
-			// console.log(window.innerWidth, labelWidth)
+			console.log(window.innerWidth, labelWidth)
 
 			const margin = {
 				left: 0, 
@@ -410,7 +413,8 @@
 			// const h = getDivDimension("#svgCanvas", "height")
 			
       
-			
+			// #a00d22
+			// #f391a3
 			
 
 			// add tooltip
@@ -430,7 +434,7 @@
 
 			const width = getDivDimension("#svgCanvas", "width")
 			const height = getDivDimension("#svgCanvas", "height")
-			// console.log(width, height)
+			console.log(width, height)
 
 			const pack = d3.pack()
           .padding(d => d.padding || 0)
@@ -461,7 +465,7 @@
 						.sort((a,b) => a.data.geo_scope_val - b.data.geo_scope_val)
 						// .sort((a,b) => a.geo_scope_val - b.geo_scope_val)
     
-        // console.log(root)
+        console.log(root)
 
         draw(false, root, buttonId);
 
@@ -652,9 +656,11 @@
 										} else if (d.data.geo_scope === 'Level 1') {
 											return "white"
 										} else if (d.data.geo_scope === 'Level 2') {
-											return "#ff7a91"
+											// return "#ff7a91"
+											return "#f391a3"
 										} else if (d.data.geo_scope === 'Level 3') {
-											return "#bf1b32"
+											// return "#bf1b32"
+											return "#a00d22"
 										}
 									})
 									.style("stroke", d => {
@@ -663,9 +669,11 @@
 										} else if (d.data.geo_scope === 'Level 1') {
 											return "white"
 										} else if (d.data.geo_scope === 'Level 2') {
-											return "#ff7a91"
+											// return "#ff7a91"
+											return "#f391a3"
 										} else if (d.data.geo_scope === 'Level 3') {
-											return "#bf1b32"
+											// return "#bf1b32"
+											return "#a00d22"
 										}
 									})
 									// .style("fill", (d,i) => `rgb(255, 255, ${i})`)
