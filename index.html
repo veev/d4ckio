@@ -695,7 +695,11 @@
 									.attr("opacity", 1)
 								),
 								update => update
-									.call(update => update.transition(t)
+									.call(update => resizing ? update.attr("cx", d => d.x)
+										.attr("cy", d => d.y)
+										// .attr("r", d => d.data.label ? d.data.labelRadius : radius)
+										.attr("r", d => radius) :
+									 update.transition(t)
 										.attr("cx", d => d.x)
 										.attr("cy", d => d.y)
 										// .attr("r", d => d.data.label ? d.data.labelRadius : radius)
