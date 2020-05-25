@@ -7,7 +7,7 @@
     <style>
       body {
         margin: 0;
-        background-color:#FF254A;
+        background-color:#ff213f;
       }
 			.container { 
 				border: 0;
@@ -124,7 +124,7 @@
 				border:1px solid white;
 				width: 12px;
 				height: 12px;
-				background-color: #FF254A;
+				background-color: #ff213f;
 			}
 			.buttonGroup {
 				margin:0 auto;
@@ -432,8 +432,8 @@
 							return Math.round(Number(dimension))
 						}
 
-			const width = getDivDimension("#svgCanvas", "width")
-			const height = getDivDimension("#svgCanvas", "height")
+			let width = getDivDimension("#svgCanvas", "width")
+			let height = getDivDimension("#svgCanvas", "height")
 			// console.log(width, height)
 
 			const pack = d3.pack()
@@ -446,6 +446,14 @@
 					// 			return d.r
 					// 		}
 					// 	});
+		
+		function updateVizDimensions() {
+			// console.log('updateVizDimensions')
+			width = getDivDimension("#svgCanvas", "width")
+			height = getDivDimension("#svgCanvas", "height")
+		}
+		
+		window.addEventListener('resize', updateVizDimensions);
 
     d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
         // console.log(data)
@@ -545,7 +553,7 @@
         }
 
         function draw(resizing, myRoot, myButtonId) {
-
+					// console.log('draw')
             svg
 							.attr("width", width + margin.left + margin.right)
 							.attr("height", height + margin.top + margin.bottom);
