@@ -421,8 +421,8 @@
 					<div class="legendLabel">Regional</div>
 					<div id="localCircle" class="legendCircle"></div>
 					<div class="legendLabel">Local</div>
-					<div id="unknownCircle" class="legendCircle"></div>
-					<div class="legendLabel">Unknown</div>
+					<!-- <div id="unknownCircle" class="legendCircle"></div>
+					<div class="legendLabel">Unknown</div> -->
 				</div>
 				<div class="buttonGroup">
 					<button id="all" class="button active">All</button>
@@ -444,13 +444,13 @@
 				// 	"numShutdowns": 214,
 				// 	"numCountries": 33
 				// 	},
-				"all": 'In 2019, <span class="highlight">1706</span> days of internet access were disrupted by <span class="highlight">213</span> internet shutdowns across <span class="highlight">33</span> countries.',
-				"sub_region": 'The subregion most affected by internet shutdowns is <span class="highlight">Southern Asia</span>. In 2019, <span class="highlight">121</span> shutdowns were recorded in <span class="highlight">India</span>.',
-				"actual_cause": '<span class="highlight">Protests</span> are the top known cause of internet and network shutdowns.',
-				"ordered_by": 'From central governments to local administrations, many have the power to order an internet shutdown.',
-				"official_just": 'Public safety, national security, or stopping fake news are commonly used to justify shutdowns.',
-				"shutdown_type_new": 'Speed throttling is more subtle than a full network shutdown and is more likely to go undetected.',
-				"affected_network": '<span class="highlight">62%</span> of the shutdowns recorded by STOP in 2019 affected both broadband and mobile networks.'
+				"all": 'In 2020, Access Now and the #KeepItOn coalition documented at least <span class="highlight">155</span> internet shutdowns in <span class="highlight">29</span> countries.',
+				"sub_region": 'Shutdowns cut off <span class="highlight">hundreds of millions</span> of people from life-saving health information, education, and work opportunities during the COVID-19 pandemic.',
+				"actual_cause": 'India kept the highest country score with <span class="highlight">109</span> recorded shutdowns.',
+				"ordered_by": "Myanmar imposed one of the world's longest recorded shutdowns in Rakhine and Chin states: <span class='highlight'>19</span> months and still counting.",
+				"official_just": 'An <span class="highlight">increasing</span> number of shutdowns occurred this year in response to ongoing violence, particularly in active conflict zones.',
+				"shutdown_type_new": 'Authoritarian regimes often shut the internet down to silence protests, sway elections, hide human rights violations, and bargain with other bad actors.',
+				"affected_network": 'Companies like <span class="highlight">Sandvine</span> and <span class="highlight">Allot</span> fuelled these shutdowns with censorship technologies.'
 			}
 
 			const selectedButtonIds = ["all", "sub_region", "actual_cause", "ordered_by", "official_just", "shutdown_type_new", "affected_network"]
@@ -560,6 +560,9 @@
 
         function getFormattedData(data, radius) {
             const mapped = data.map( d => {
+								if (d.geo_scope !== 'Level 1' && d.geo_scope !== 'Level 2' && d.geo_scope !== 'Level 3') {
+									console.log(d)
+								}
                 // create new leaner obj
                 // set radius based on geo_scope
                 if (d.geo_scope === 'Unknown') {
