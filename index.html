@@ -534,11 +534,11 @@
 		
 		window.addEventListener('resize', updateVizDimensions);
 
-    d3.csv('data/Data4Gen-Data4Viz.csv').then( data => {
+    d3.csv('data/Data4Gen-Data4Viz-2020.csv').then( data => {
         // console.log(data)
 
         const formatted = getFormattedData(data, radius)
-        // console.log(formatted)
+        console.log(formatted)
 
         // let radiusRoot = d3.hierarchy(updateNodeGroups(formatted, 'actual_cause'))
         //             .sum(d => d.radius)
@@ -615,8 +615,8 @@
 								if (d.ordered_by === 'Law enforcement') {
 									d.ordered_by = 'Law Enforcement'
 								}
-                d.access_now_ID = +d.access_now_ID
-                d.duration_affected_days = +d.duration_affected_days
+                d.ID = +d.ID
+                d.duration_days = +d.duration_days
 								d.radius = radius
                 // set starting position in center of svg
                 // d.focusX = width / 2
@@ -728,7 +728,7 @@
 			
 						const leafCircles = g.selectAll(".leaf-circle")
 							.data(
-								node.leaves(), d => d.data.access_now_ID)
+								node.leaves(), d => d.data.ID)
 							// node.leaves().map( l => {
 							// 	l.x = newLeaves[leafCounter].x
 							// 	l.y = newLeaves[leafCounter].y
@@ -792,7 +792,7 @@
 							)
 
 							const leafCirclesRollover = lg.selectAll(".leaf-circle-rollover")
-							.data(node.leaves(), d =>  d.data.access_now_ID)
+							.data(node.leaves(), d =>  d.data.ID)
 							.join(
 								enter => enter.append("circle")
 									.style("fill", "white")
@@ -926,8 +926,8 @@
 					if (d.data.country) {
 						html += '<div class="title"><b>' + d.data.country + '</b></div>'
 					}
-					if (d.data.duration_affected_days) {
-						html += '<b>Affected Days</b>: ' + d.data.duration_affected_days
+					if (d.data.duration_days) {
+						html += '<b>Affected Days</b>: ' + d.data.duration_days
 					}
 					if (d.data.geo_scope_label) {
 						html += '<br><b>Geographic Scope</b>: ' + d.data.geo_scope_label
@@ -950,8 +950,8 @@
 					if (d.data['full or service-based']) {
 						html += '<br><b>Full or Service-based</b>: ' + d.data['full or service-based']
 					}
-					// if (d.data.access_now_ID) {
-					// 	html += '<br><b>ID</b> ' + d.data.access_now_ID
+					// if (d.data.ID) {
+					// 	html += '<br><b>ID</b> ' + d.data.ID
 					// }
 					// console.log(html.toString())
 					return `${html.toString()}`
